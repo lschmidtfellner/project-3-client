@@ -58,4 +58,4 @@ const UserCarListings = () => {
   );
 }
 
-export default UserCarListings;
+export { UserCarListings, handleDelete, handleEdit, handleCreate };
