@@ -66,6 +66,9 @@ export default FeaturedCars;
 //       }
 //     );
 //     setSearchResults(response.data);
+
+//     const img = await axios.get()
+//     `api.com`
 //   };
 
 //   return (
