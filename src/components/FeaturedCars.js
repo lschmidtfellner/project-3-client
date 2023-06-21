@@ -6,6 +6,16 @@ import Car from '../components/Car';
 const FeaturedCars = () => {
   const { cars } = useContext(CarContext); // Use CarContext instead of CarContextProvider
 
+  //     const response = await axios.get(
+  //     `https://api.carsxe.com/vehicles?make=${selectedMake}&model=${selectedModel}&include=sold,images,dealer,options,generation`,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer YOUR_CARSXE_API_KEY`
+  //       }
+  //     }
+  //   );
+  //   setSearchResults(response.data);
+
   return (
     <div>
       <h1>Featured Cars</h1>

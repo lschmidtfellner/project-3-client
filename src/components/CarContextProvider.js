@@ -14,8 +14,8 @@ export const CarContextProvider = props => {
     axios.get('https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts', 
     {
       auth: {
-        username: 'cicely',
-        password: 'cicely'
+        username: 'luke',
+        password: 'test@test.com'
       }
     })
       .then(response => setCars(response.data))
