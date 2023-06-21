@@ -11,7 +11,7 @@ function CreateNewListing() {
   const [yearList, setYearList] = useState([])
   const [yearId, setYearId] = useState('')
 
-  const [mileageId, setMileageId] = useState('')
+  const [mileageBody, setMileageBody] = useState('')
 
   const [descriptionBody, setDescriptionBody] = useState('')
 
@@ -88,9 +88,9 @@ function CreateNewListing() {
       Make: makeId,
       Model: modelId,
       Year: yearId,
-      Mileage: mileageId,
+      Mileage: mileageBody,
       Description: descriptionBody, // Replace with actual description input value
-      user: "6491bad061e3cef5acb1e3a3"
+      user: '6491bad061e3cef5acb1e3a3'
 
       // Image: 'Your image URL here' // Replace with actual image URL or file upload logic
     }
@@ -149,18 +149,15 @@ function CreateNewListing() {
           </option>
         ))}
       </select>
-      <select
-        value={descriptionBody}
+      <input
+        type="text"
         className="mileage-input"
+        placeholder="mileage:"
         onChange={(e) => {
-          setMileageId(e.target.value)
+          setMileageBody(e.target.value)
         }}
-      >
-        <option value={1}>1</option>
-        <option value={2}>2</option>
-        <option value={3}>3</option>
-        <option value={4}>4</option>
-      </select>
+      />
+
       <input
         type="text"
         className="car-description"
