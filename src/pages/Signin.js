@@ -4,22 +4,43 @@ import { signin } from '../api/auth'
 import { AuthContext } from "../context/AuthContextComponent";
 
 export default function Signin() {
-  const [text, setText] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
-  const { setIsLoggedIn } = useContext(AuthContext)
+  const [text, setText] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // New state variable for error message
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   async function handleSubmit(e) {
-    e.preventDefault()
-    const response = await signin(text, password)
-    setIsLoggedIn(true) // This will set isLoggedIn to true when user successfully signs in
-    navigate('/api/saleposts') // Redirect to "/saleposts" page
-    console.log(response);
+    e.preventDefault();
+
+    try {
+      // Make a request to the server to authenticate the user
+      const response = await signin(text, password);
+
+      if (response.error) {
+        // Authentication failed - user does not exist
+        setErrorMessage('User does not exist.');
+      } else {
+        // Authentication succeeded
+        const { token } = response;
+        // Store the token in local storage
+        localStorage.setItem('token', token);
+        // Set the authentication state to true
+        setIsLoggedIn(true);
+        // Redirect the user to the authenticated route
+        navigate('/api/saleposts');
+      }
+    } catch (error) {
+      // Handle authentication errors
+      console.error('Authentication failed:', error);
+      setErrorMessage('Authentication failed. Please try again.'); // Set a generic error message
+    }
   }
 
   return (
     <div>
       <h1>Sign In</h1>
+      {errorMessage && <p>{errorMessage}</p>} {/* Render the error message if it exists */}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -31,12 +52,11 @@ export default function Signin() {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <button>Signin</button>
+        <button type="submit">Sign In</button> {/* Specify the type as "submit" */}
       </form>
       <span>
-        {'!Already a user? '}
-        <Link to="/auth/signup">Go to Signup</Link>
-        {' instead.'}
+        {'Not a user yet? '}
+        <Link to="/auth/signup">Sign Up</Link>
       </span>
     </div>
   )

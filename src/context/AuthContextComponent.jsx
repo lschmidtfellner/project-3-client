@@ -1,23 +1,29 @@
-import React, { createContext, useEffect, useState } from 'react'
-import { isTokenValid } from '../api/auth'
+import React, { createContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// Create a Context Provider called AuthProvider
-export const AuthContext = createContext(null)
+export const AuthContext = createContext(null);
 
-// Create our own Context component in which data about auth lives on its state
-export default function AuthContextComponent({children}) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [user, setUser] = useState({})
+export default function AuthContextComponent({ children }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+  const navigate = useNavigate(); // Use the useNavigate hook
 
-    // No longer checking token validity on load
-    // If you need to check token validity after a user logs in,
-    // you should do it in your signin function or after the user is authenticated
-
-    return (
-        <AuthContext.Provider value={
-            { isLoggedIn, setIsLoggedIn, user }
-        }>
-            {children}
-        </AuthContext.Provider>
-    )
+  const signOut = () => {
+    // Clear user data
+    setUser({});
+    // Set isLoggedIn to false
+    setIsLoggedIn(false);
+    // Perform any additional sign-out logic (e.g., API calls, etc.)
+  
+    // Delete the token from local storage
+    localStorage.removeItem('token');
+  
+    // Redirect the user to the sign-in page or any other desired location
+    navigate('/auth/signin');
+  };
+  return (
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
