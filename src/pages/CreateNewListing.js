@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
+import { AuthContext } from '../context/AuthContextComponent'
 
 function CreateNewListing() {
+  const { currentUser } = useContext(AuthContext)
+
   const [makeList, setMakeList] = useState([])
   const [makeId, setMakeId] = useState('')
 
