@@ -14,11 +14,6 @@ function App() {
   
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Navigate to="/auth/signin" replace />} />
-        <Route path="/auth/signup" element={<Signup/>} />
-        <Route path="/auth/signin" element={<Signin/>} />
-      </Routes>
     </>
   );
 }
