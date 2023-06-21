@@ -4,6 +4,8 @@ import { useContext, useEffect } from 'react';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import { AuthContext } from './context/AuthContextComponent';
+import { CarContextProvider } from './components/CarContextProvider';
+import FeaturedCars from './components/FeaturedCars';
 
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
@@ -14,6 +16,9 @@ function App() {
   
   return (
     <>
+    <CarContextProvider>
+      <FeaturedCars />
+    </CarContextProvider>
     </>
   );
 }
