@@ -6,6 +6,8 @@ import Signup from './pages/Signup';
 import { AuthContext } from './context/AuthContextComponent';
 import { CarContextProvider } from './components/CarContextProvider';
 import FeaturedCars from './components/FeaturedCars';
+import CreateNewListing from './pages/CreateNewListing';
+import api from './api/apiConfig';
 
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
@@ -17,7 +19,7 @@ function App() {
   return (
     <>
     <CarContextProvider>
-      <FeaturedCars />
+      <CreateNewListing />
     </CarContextProvider>
     </>
   );
