@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { signup } from '../api/auth';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root') // replace #root with the id of your application's root element
+Modal.setAppElement('#root')
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -30,7 +30,6 @@ export default function Signup() {
   return (
     <div>
       <h1>Sign Up</h1>
-      {console.log(signupSuccess)}
       <Modal
         isOpen={signupSuccess}
         onRequestClose={handleDismiss}
@@ -41,25 +40,33 @@ export default function Signup() {
         <button onClick={handleDismiss}>Dismiss</button>
       </Modal>
       <form onSubmit={handleSubmit}>
-        <input
-          type="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-        />
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button>Signup</button>
+        <div>
+          <input
+            type="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+          />
+        </div>
+        <div>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+          />
+        </div>
+        <div>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+        </div>
+        <div>
+          <button>Signup</button>
+        </div>
       </form>
       {!signupSuccess && (
         <span>
