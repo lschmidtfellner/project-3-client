@@ -12,8 +12,8 @@ export default function Signin() {
   async function handleSubmit(e) {
     e.preventDefault()
     const response = await signin(text, password)
-    setIsLoggedIn(true)
-    navigate('/')
+    setIsLoggedIn(true) // This will set isLoggedIn to true when user successfully signs in
+    navigate('/api/saleposts') // Redirect to "/saleposts" page
     console.log(response);
   }
 
