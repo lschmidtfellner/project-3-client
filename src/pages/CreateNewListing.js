@@ -18,6 +18,8 @@ function CreateNewListing() {
 
   const [descriptionBody, setDescriptionBody] = useState('')
 
+  const [carCategory, setCarCategory] = useState('')
+
   useEffect(() => {
     let ignore = false
     axios
@@ -72,6 +74,7 @@ function CreateNewListing() {
         .then((response) => {
           if (!ignore) {
             console.log('fetched list of years')
+            setCarCategory(response.data[0].Category)
             const years = response.data
               .map((car) => car.Year)
               .filter((year, index, array) => array.indexOf(year) === index)
@@ -91,7 +94,9 @@ function CreateNewListing() {
       Make: makeId,
       Model: modelId,
       Year: yearId,
+      Category: carCategory,
       Mileage: mileageBody,
+      Condition: 'used',
       Description: descriptionBody, // Replace with actual description input value
       user: '6491bad061e3cef5acb1e3a3'
 
