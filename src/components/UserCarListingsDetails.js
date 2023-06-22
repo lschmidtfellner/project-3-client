@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { handleDelete, handleEdit, handleCreate } from './UserCarListings';
 
-
-
+function UserCarListingsDetails() {
   return (
     <div>
       {carList.map(car => (
@@ -19,6 +18,6 @@ import { handleDelete, handleEdit, handleCreate } from './UserCarListings';
       <button onClick={handleCreate}>Create New Listing</button>
     </div>
   );
-
+}
 
 export default UserCarListingsDetails;

@@ -4,6 +4,7 @@ import { CarContext } from '../components/CarContextProvider';
 
 const FeaturedCars = () => {
   const { cars } = useContext(CarContext);
+
   console.log('Cars from context:', cars);
 
   const [makes, setMakes] = useState([]);
@@ -73,7 +74,7 @@ const FeaturedCars = () => {
       <button onClick={handleReset}>Reset</button>
       {filterApplied ? (
         filteredCars.map((car) => (
-          <Link to={`/api/saleposts/${car._id}`} key={car._id}>
+          <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
             <div>
               <p>Year: {car.Year}</p>
               <p>Make: {car.Make}</p>
@@ -85,7 +86,7 @@ const FeaturedCars = () => {
         ))
       ) : (
         cars.map((car) => (
-          <Link to={`/api/saleposts/${car._id}`} key={car._id}>
+          <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
             <div>
               <p>Year: {car.Year}</p>
               <p>Make: {car.Make}</p>
