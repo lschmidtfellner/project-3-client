@@ -15,10 +15,13 @@ function Navbar() {
     <nav className="navbar">
       <ul className="hamburger">
         <li>
-          <Link to="/">Home/Feed</Link>
+          <Link to="/home">Home/Feed</Link>
         </li>
         <li>
-          <Link to="/YourListings">Your Listings</Link>
+          <Link to="/listings">Your Listings</Link>
+        </li>
+        <li>
+          <Link to="/post">Create New Listing</Link>
         </li>
         <li>
           <button onClick={handleSignOut}>Sign Out</button>
