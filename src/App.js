@@ -11,6 +11,7 @@ import AuthContextComponent, {
   AuthContext
 } from './context/AuthContextComponent'
 import Nav from './components/Nav'
+import CarDetails from './components/CarDetails'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ const AppContent = () => {
           element={isLoggedIn ? <FeaturedCars /> : <Signin />}
         />
         <Route path="/post" element={isLoggedIn ? <CreateNewListing /> : <Signin/>} />
+        <Route path='/cardetails' element={<CarDetails />} />
       </Routes>
     </CarContextProvider>
   )
