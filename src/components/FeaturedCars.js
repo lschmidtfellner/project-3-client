@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { CarContext } from '../components/CarContextProvider';
 
 const FeaturedCars = () => {
-  const { cars } = useContext(CarContext);
+  const { cars, isLoggedIn } = useContext(CarContext);
 
   console.log('Cars from context:', cars);
 

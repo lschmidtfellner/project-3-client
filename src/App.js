@@ -1,6 +1,6 @@
 
 import { Routes, Route } from 'react-router-dom'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Signin from './pages/Signin'
 import Signup from './pages/Signup'
 import { CarContextProvider } from './components/CarContextProvider'
@@ -26,6 +26,11 @@ function App() {
 const AppContent = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
 
+  useEffect(() => {
+    console.log("Logged in?")
+    console.log(isLoggedIn)
+  }, [isLoggedIn])
+
   return (
     <CarContextProvider>
       <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
@@ -34,7 +39,7 @@ const AppContent = () => {
         <Route path="/auth/signin" element={<Signin />} />
         <Route
           path="/home"
-          element={isLoggedIn ? <FeaturedCars /> : <Signin />}
+          element={ isLoggedIn ? <FeaturedCars /> : <Signin />}
         />
         <Route path="/post" element={isLoggedIn ? <CreateNewListing /> : <Signin/>} />
         <Route path='/cardetails' element={<CarDetails />} />

@@ -27,6 +27,7 @@ export default function Signin() {
         const { token } = response
         // Store the token in local storage
         localStorage.setItem('token', token)
+        localStorage.setItem('loggedIn', true)
         // Set the authentication state to true
         setIsLoggedIn(true)
         // Set user
