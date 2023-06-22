@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import React, { useContext } from 'react';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
-import { AuthContext } from './context/AuthContextComponent';
+
 import { CarContextProvider } from './components/CarContextProvider';
 import FeaturedCars from './components/FeaturedCars';
 import CreateNewListing from './pages/CreateNewListing';
