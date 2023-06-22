@@ -34,7 +34,7 @@ const CarDetails = () => {
     // window.open(mailtoLink);
 
     setTimeout(() => {
-      window.location.reload()
+      // window.location.reload()
     }, 2000)
     Swal.fire({
       icon: 'success',
