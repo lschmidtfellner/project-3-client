@@ -11,26 +11,38 @@ export default function AuthContextComponent({ children }) {
   useEffect(() => {
     const loggedIn = localStorage.getItem('loggedIn');
     setIsLoggedIn(loggedIn);
+  
+    // Retrieve the user object from localStorage
+    const user = localStorage.getItem('user');
+    if (user) {
+      setUser(JSON.parse(user));
+    }
   }, [])
 
   const signOut = () => {
     // Clear user data
     setUser({})
+  
     // Set isLoggedIn to false
     setIsLoggedIn(false)
-    // localStorage.setItem('loggedIn', false)
-    // Perform any additional sign-out logic (e.g., API calls, etc.)
-
-    // Delete the token from local storage
+  
+    // Remove the token and loggedIn status from localStorage
     localStorage.removeItem('token')
     localStorage.removeItem('loggedIn')
-
+  
+    // Remove the user object from localStorage
+    localStorage.removeItem('user')
+  
     // Redirect the user to the sign-in page or any other desired location
     navigate('/auth/signin')
   }
 
-  const signIn = (userName) => {
-    setUser()
+  const signIn = (user) => {
+    // Set the user object in the state
+    setUser(user);
+  
+    // Store the user object in localStorage
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   return (
