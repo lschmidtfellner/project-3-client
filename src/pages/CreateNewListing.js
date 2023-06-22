@@ -3,7 +3,7 @@ import axios from 'axios'
 import { AuthContext } from '../context/AuthContextComponent'
 
 function CreateNewListing() {
-  const { currentUser } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
   const [makeList, setMakeList] = useState([])
   const [makeId, setMakeId] = useState('')
@@ -98,7 +98,7 @@ function CreateNewListing() {
       Mileage: mileageBody,
       Condition: 'used',
       Description: descriptionBody, // Replace with actual description input value
-      user: '6491bad061e3cef5acb1e3a3'
+      user: user
 
       // Image: 'Your image URL here' // Replace with actual image URL or file upload logic
     }
