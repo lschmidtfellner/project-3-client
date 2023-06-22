@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContextComponent'
+import Swal from 'sweetalert2'
 
 function CreateNewListing() {
-  const { currentUser } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
   const [makeList, setMakeList] = useState([])
   const [makeId, setMakeId] = useState('')
@@ -33,6 +34,7 @@ function CreateNewListing() {
             .map((car) => car.Make)
             .filter((make, index, array) => array.indexOf(make) === index)
           setMakeList(makes)
+          setMakeId(makes[0])
         }
       })
     return () => {
@@ -50,6 +52,7 @@ function CreateNewListing() {
         .then((response) => {
           if (!ignore) {
             console.log('fetched list of models')
+            setCarCategory(response.data[0].Category)
             const models = response.data
               .map((car) => car.Model)
               .filter((model, index, array) => array.indexOf(model) === index)
@@ -74,12 +77,12 @@ function CreateNewListing() {
         .then((response) => {
           if (!ignore) {
             console.log('fetched list of years')
-            setCarCategory(response.data[0].Category)
             const years = response.data
               .map((car) => car.Year)
               .filter((year, index, array) => array.indexOf(year) === index)
             setYearList(years)
             setYearId(years[0])
+
           }
         })
       return () => {
@@ -98,7 +101,7 @@ function CreateNewListing() {
       Mileage: mileageBody,
       Condition: 'used',
       Description: descriptionBody, // Replace with actual description input value
-      user: '6491bad061e3cef5acb1e3a3'
+      user: user
 
       // Image: 'Your image URL here' // Replace with actual image URL or file upload logic
     }
@@ -112,10 +115,20 @@ function CreateNewListing() {
       .then((response) => {
         console.log('New listing created successfully:', response.data)
         // Handle any success actions here
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'New listing created successfully'
+        })
       })
       .catch((error) => {
         console.error('Error creating new listing:', error)
         // Handle any error actions here
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error creating new listing'
+        })
       })
   }
 
