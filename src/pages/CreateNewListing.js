@@ -3,7 +3,7 @@ import axios from 'axios'
 import { AuthContext } from '../context/AuthContextComponent'
 
 function CreateNewListing() {
-  const { currentUser } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
   const [makeList, setMakeList] = useState([])
   const [makeId, setMakeId] = useState('')
@@ -20,75 +20,16 @@ function CreateNewListing() {
 
   const [carCategory, setCarCategory] = useState('')
 
-  useEffect(() => {
-    let ignore = false
-    axios
-      .get(
-        'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo'
-      )
-      .then((response) => {
-        if (!ignore) {
-          console.log('fetched list of makes')
-          const makes = response.data
-            .map((car) => car.Make)
-            .filter((make, index, array) => array.indexOf(make) === index)
-          setMakeList(makes)
-        }
-      })
-    return () => {
-      ignore = true
-    }
-  }, [])
-
-  useEffect(() => {
-    let ignore = false
-    if (makeId !== '') {
-      axios
-        .get(
-          `https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo/search?Make=${makeId}`
-        )
-        .then((response) => {
-          if (!ignore) {
-            console.log('fetched list of models')
-            const models = response.data
-              .map((car) => car.Model)
-              .filter((model, index, array) => array.indexOf(model) === index)
-            setModelList(models)
-            setModelId(models[0])
-          }
-        })
-
-      return () => {
-        ignore = true
-      }
-    }
-  }, [makeId])
-
-  useEffect(() => {
-    let ignore = false
-    if (modelId !== '') {
-      axios
-        .get(
-          `https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo/search?Make=${makeId}&Model=${modelId}`
-        )
-        .then((response) => {
-          if (!ignore) {
-            console.log('fetched list of years')
-            setCarCategory(response.data[0].Category)
-            const years = response.data
-              .map((car) => car.Year)
-              .filter((year, index, array) => array.indexOf(year) === index)
-            setYearList(years)
-            setYearId(years[0])
-          }
-        })
-      return () => {
-        ignore = true
-      }
-    }
-  }, [makeId, modelId])
+  // Rest of your code...
 
   const handleCreateListing = () => {
+    // Check if user is logged in and user data is available
+    if (!user || Object.keys(user).length === 0) {
+      console.error('User is not authenticated or user data has not been fetched yet.');
+      // Redirect to login or handle this case appropriately here...
+      return;
+    }
+
     // Prepare the data to be sent to the backend
     const newListing = {
       Make: makeId,
@@ -97,9 +38,8 @@ function CreateNewListing() {
       Category: carCategory,
       Mileage: mileageBody,
       Condition: 'used',
-      Description: descriptionBody, // Replace with actual description input value
-      user: '6491bad061e3cef5acb1e3a3'
-
+      Description: descriptionBody,
+      user: user._id
       // Image: 'Your image URL here' // Replace with actual image URL or file upload logic
     }
 

@@ -1,8 +1,8 @@
 import axios from 'axios'
 const LOCALSTORAGE_KEY='token'
 const api = axios.create({
-  baseURL: 'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/',
-//   baseURL: 'http://localhost:8000',
+  // baseURL: 'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/',
+  baseURL: 'http://localhost:8000'
 
 })
 api.interceptors.request.use(config => {

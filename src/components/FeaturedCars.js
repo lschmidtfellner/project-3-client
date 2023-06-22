@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CarContext } from '../components/CarContextProvider';
+import { AuthContext } from '../context/AuthContextComponent';
 
 const FeaturedCars = () => {
   const { cars } = useContext(CarContext);
+  const { isLoggedIn } = useContext(AuthContext);
   console.log('Cars from context:', cars);
 
   const [makes, setMakes] = useState([]);
@@ -14,14 +16,20 @@ const FeaturedCars = () => {
   const [filterApplied, setFilterApplied] = useState(false);
 
   useEffect(() => {
-    const uniqueMakes = [...new Set(cars.map(car => car.Make))];
+    const uniqueMakes = [...new Set(cars.map((car) => car.Make))];
     setMakes(uniqueMakes);
     console.log('Unique makes:', uniqueMakes);
   }, [cars]);
 
   useEffect(() => {
     if (selectedMake) {
-      const relevantModels = [...new Set(cars.filter(car => car.Make === selectedMake).map(car => car.Model))];
+      const relevantModels = [
+        ...new Set(
+          cars
+            .filter((car) => car.Make === selectedMake)
+            .map((car) => car.Model)
+        )
+      ];
       setModels(relevantModels);
       console.log('Relevant models:', relevantModels);
     } else {
@@ -32,7 +40,9 @@ const FeaturedCars = () => {
 
   useEffect(() => {
     if (selectedModel) {
-      const relevantCars = cars.filter(car => car.Make === selectedMake && car.Model === selectedModel);
+      const relevantCars = cars.filter(
+        (car) => car.Make === selectedMake && car.Model === selectedModel
+      );
       setFilteredCars(relevantCars);
       console.log('Filtered cars:', relevantCars);
     } else {
@@ -50,25 +60,43 @@ const FeaturedCars = () => {
     setSelectedModel('');
   };
 
+  if (!isLoggedIn) {
+    return null; // Return null or a loading indicator if the user is not logged in
+  }
+
   return (
     <div>
       <h1>Featured Cars</h1>
       <div>
         <label>Make: </label>
-        <select value={selectedMake} onChange={e => setSelectedMake(e.target.value)}>
+        <select
+          value={selectedMake}
+          onChange={(e) => setSelectedMake(e.target.value)}
+        >
           <option value=''>Select Make</option>
-          {makes.map(make => <option key={make} value={make}>{make}</option>)}
+          {makes.map((make) => (
+            <option key={make} value={make}>
+              {make}
+            </option>
+          ))}
         </select>
       </div>
-      {selectedMake &&
+      {selectedMake && (
         <div>
           <label>Model: </label>
-          <select value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
+          <select
+            value={selectedModel}
+            onChange={(e) => setSelectedModel(e.target.value)}
+          >
             <option value=''>Select Model</option>
-            {models.map(model => <option key={model} value={model}>{model}</option>)}
+            {models.map((model) => (
+              <option key={model} value={model}>
+                {model}
+              </option>
+            ))}
           </select>
         </div>
-      }
+      )}
       <button onClick={handleApply}>Apply</button>
       <button onClick={handleReset}>Reset</button>
       {filterApplied ? (

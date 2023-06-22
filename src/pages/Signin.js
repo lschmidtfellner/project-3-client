@@ -1,39 +1,41 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signin } from '../api/auth'
+import { signin, getUserInfo } from '../api/auth'; // Import the getUserInfo function
 import { AuthContext } from "../context/AuthContextComponent";
 
 export default function Signin() {
   const [text, setText] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // New state variable for error message
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn, setUser } = useContext(AuthContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      // Make a request to the server to authenticate the user
       const response = await signin(text, password);
 
       if (response.error) {
-        // Authentication failed - user does not exist
         setErrorMessage('User does not exist.');
       } else {
-        // Authentication succeeded
         const { token } = response;
-        // Store the token in local storage
         localStorage.setItem('token', token);
-        // Set the authentication state to true
         setIsLoggedIn(true);
-        // Redirect the user to the authenticated route
+
+        const userInfo = await getUserInfo(); // Retrieve user info after successful signin
+
+        if (userInfo.error) {
+          setErrorMessage('Failed to get user information.');
+        } else {
+          setUser(userInfo); // Update the user context with the retrieved user info
+        }
+
         navigate('/home');
       }
     } catch (error) {
-      // Handle authentication errors
       console.error('Authentication failed:', error);
-      setErrorMessage('Authentication failed. Please try again.'); // Set a generic error message
+      setErrorMessage('Authentication failed. Please try again.');
     }
   }
 
@@ -59,5 +61,5 @@ export default function Signin() {
         <Link to="/auth/signup">Sign Up</Link>
       </span>
     </div>
-  )
+  );
 }
