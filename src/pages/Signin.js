@@ -28,7 +28,7 @@ export default function Signin() {
         // Set the authentication state to true
         setIsLoggedIn(true);
         // Redirect the user to the authenticated route
-        navigate('/api/saleposts');
+        navigate('/home');
       }
     } catch (error) {
       // Handle authentication errors
