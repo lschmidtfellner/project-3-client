@@ -34,7 +34,7 @@ const AppContent = () => {
           path="/home"
           element={isLoggedIn ? <FeaturedCars /> : <Signin />}
         />
-        <Route path="/post" element={<CreateNewListing />} />
+        <Route path="/post" element={isLoggedIn ? <CreateNewListing /> : <Signin/>} />
       </Routes>
     </CarContextProvider>
   )
