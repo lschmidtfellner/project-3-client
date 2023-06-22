@@ -18,7 +18,7 @@ function Navbar() {
           <Link to="/home">Home/Feed</Link>
         </li>
         <li>
-          <Link to="/listings">Your Listings</Link>
+          <Link to="/usercarlistings">Your Listings</Link>
         </li>
         <li>
           <Link to="/post">Create New Listing</Link>
