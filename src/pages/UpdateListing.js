@@ -2,9 +2,18 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContextComponent'
 import Swal from 'sweetalert2'
+import { useLocation } from 'react-router-dom';
+
 
 function UpdateListing() {
   const { user } = useContext(AuthContext)
+  const { cars } = useContext(CarContext);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedCarId = queryParams.get('id');
+
+  const [carToUpdate, setCarToUpdate] = useState({})
 
   const [makeList, setMakeList] = useState([])
   const [makeId, setMakeId] = useState('')
@@ -20,6 +29,11 @@ function UpdateListing() {
   const [descriptionBody, setDescriptionBody] = useState('')
 
   const [carCategory, setCarCategory] = useState('')
+
+  useEffect(() => {
+    const car = cars.find((car) => car._id === selectedCarId)
+    setCarToUpdate(car)
+  })
 
   useEffect(() => {
     let ignore = false
@@ -106,7 +120,7 @@ function UpdateListing() {
 
     axios
       .put(
-        `https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts/${postId}`,
+        `https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts/${carToUpdate._id}`,
         newListing
       )
       .then((response) => {
@@ -171,6 +185,7 @@ function UpdateListing() {
         type="text"
         className="mileage-input"
         placeholder="mileage:"
+        value={carToUpdate.Mileage}
         onChange={(e) => {
           setMileageBody(e.target.value)
         }}
@@ -180,6 +195,7 @@ function UpdateListing() {
         type="text"
         className="car-description"
         placeholder="description:"
+        value={carToUpdate.Description}
         onChange={(e) => {
           setDescriptionBody(e.target.value)
         }}
