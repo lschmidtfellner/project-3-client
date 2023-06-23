@@ -53,9 +53,11 @@ const CarDetails = () => {
       <p>Condition: {selectedCar.Condition}</p>
       <p>Description: {selectedCar.Description}</p>
       <button onClick={generateEmailAddress}><a href={`mailto:${emailAddress}`}>contact seller</a></button>
-      <p>Date added: {selectedCar.date}</p>
     </div>
   );
 };
 
 export default CarDetails;
+
+
+

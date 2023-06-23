@@ -22,6 +22,6 @@ export const CarContextProvider = (props) => {
   }, [])
 
   return (
-    <CarContext.Provider value={{ cars }}>{props.children}</CarContext.Provider>
+    <CarContext.Provider value={{ cars, setCars }}>{props.children}</CarContext.Provider>
   )
 }
