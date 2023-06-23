@@ -21,15 +21,15 @@ function CreateNewListing() {
 
   const [carCategory, setCarCategory] = useState('');
 
+  const [selectedImages, setSelectedImages] = useState([]);
+
   useEffect(() => {
     let ignore = false;
     axios
-      .get(
-        'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo'
-      )
+      .get('https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo')
       .then((response) => {
         if (!ignore) {
-          console.log('fetched list of makes', response.data);
+          console.log('Fetched list of makes:', response.data);
           const makes = response.data
             .map((car) => car.Make)
             .filter((make, index, array) => array.indexOf(make) === index);
@@ -54,7 +54,7 @@ function CreateNewListing() {
         )
         .then((response) => {
           if (!ignore) {
-            console.log('fetched list of models', response.data);
+            console.log('Fetched list of models:', response.data);
             setCarCategory(response.data[0].Category);
             const models = response.data
               .map((car) => car.Model)
@@ -82,7 +82,7 @@ function CreateNewListing() {
         )
         .then((response) => {
           if (!ignore) {
-            console.log('fetched list of years', response.data);
+            console.log('Fetched list of years:', response.data);
             const years = response.data
               .map((car) => car.Year)
               .filter((year, index, array) => array.indexOf(year) === index);
@@ -99,6 +99,12 @@ function CreateNewListing() {
     }
   }, [makeId, modelId]);
 
+  const handleImageUpload = (e) => {
+    const selectedImages = Array.from(e.target.files);
+    setSelectedImages(selectedImages);
+    console.log('Selected Images:', selectedImages);
+  };
+
   const handleCreateListing = () => {
     // Prepare the data to be sent to the backend
     const newListing = {
@@ -109,14 +115,24 @@ function CreateNewListing() {
       Mileage: mileageBody,
       Condition: 'used',
       Description: descriptionBody,
-      user: user
+      user: user,
     };
 
-    // Send the data to the backend route
+    // Create a FormData object to send the data along with the images
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(newListing));
+    selectedImages.forEach((image) => {
+      formData.append('images', image);
+    });
+
+    console.log('New Listing:', newListing);
+    console.log('Form Data:', formData);
+
+    // Send the data and images to the backend route
     axios
       .post(
         'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts',
-        newListing
+        formData
       )
       .then((response) => {
         console.log('New listing created successfully:', response.data);
@@ -124,7 +140,7 @@ function CreateNewListing() {
         Swal.fire({
           icon: 'success',
           title: 'Success',
-          text: 'New listing created successfully'
+          text: 'New listing created successfully',
         });
       })
       .catch((error) => {
@@ -133,7 +149,7 @@ function CreateNewListing() {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Error creating new listing'
+          text: 'Error creating new listing',
         });
       });
   };
@@ -193,7 +209,12 @@ function CreateNewListing() {
           setDescriptionBody(e.target.value);
         }}
       ></input>
-      <button className="image-button">Upload Image</button>
+      <input type="file" multiple onChange={handleImageUpload} />
+      {selectedImages.map((image, index) => (
+        <div key={index}>
+          <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
+        </div>
+      ))}
       <button className="create-btn" onClick={handleCreateListing}>
         Create New Listing
       </button>
