@@ -33,7 +33,7 @@ export default function Signin() {
         // Set user
 
         // Redirect the user to the authenticated route
-        navigate('/home')
+        navigate('/')
       }
     } catch (error) {
       // Handle authentication errors
