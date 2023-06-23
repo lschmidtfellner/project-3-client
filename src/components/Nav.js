@@ -15,7 +15,7 @@ function Navbar() {
     <nav className="navbar">
       <ul className="hamburger">
         <li>
-          <Link to="/home">Home/Feed</Link>
+          <Link to="/">Home/Feed</Link>
         </li>
         <li>
           <Link to="/usercarlistings">Your Listings</Link>
