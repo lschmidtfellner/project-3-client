@@ -64,7 +64,7 @@ const UserCarListings = () => {
       )}
       {/* CHANGE THIS LINK ONCE LUKE GIVES NEW CREATE FORM ROUTE */}
       <>
-        <Link className="mt-4" to={`/post?id=${cars.user}`}>
+        <Link className="mt-4" to="/post">
           <button>Create New Listing</button>
         </Link>
       </>

@@ -55,14 +55,14 @@ const UserCarListingsDetails = () => {
                 <p>Condition: {selectedCar.Condition}</p>
                 <p>Description: {selectedCar.Description}</p>
                 {/* CHANGE THIS LINK ONCE LUKE GIVES NEW EDIT FORM ROUTE */}
-                <Link to={`/post?id=${cars._id}`}>
+                <Link to={`/post?id=${selectedCar._id}`}>
                     <button>Edit</button>
                 </Link>
                 {/* <Link to={`/usercarlistings?id=${car._id}`}> */}
-                <button onClick={() => handleDelete(cars._id)}>Delete</button>
+                <button onClick={() => handleDelete(selectedCar._id)}>Delete</button>
                 {/* </Link> */}
             </div>
-            <Link className="mt-4" to={`/post?id=${cars.user}`}>
+            <Link className="mt-4" to="/post">
                 <button>Create New Listing</button>
             </Link>
         </>
