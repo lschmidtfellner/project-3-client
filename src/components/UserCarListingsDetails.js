@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContextComponent';
 import { CarContext } from '../components/CarContextProvider';
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
+
 
 const UserCarListingsDetails = () => {
     const { cars, setCars } = useContext(CarContext);
@@ -13,6 +15,7 @@ const UserCarListingsDetails = () => {
     const queryParams = new URLSearchParams(location.search);
     const selectedCarId = queryParams.get('id');
     const [selectedCar, setSelectedCar] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (selectedCarId) {
@@ -22,6 +25,7 @@ const UserCarListingsDetails = () => {
     }, [cars, selectedCarId]);
 
     if (!selectedCar) {
+        navigate(-1); 
         return <span>Loading...</span>; // Add loading state until the car data is fetched
     }
 
