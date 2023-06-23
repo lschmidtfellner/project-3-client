@@ -1,49 +1,52 @@
-import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
-import { AuthContext } from '../context/AuthContextComponent'
-import Swal from 'sweetalert2'
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContextComponent';
+import Swal from 'sweetalert2';
 
 function CreateNewListing() {
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
-  const [makeList, setMakeList] = useState([])
-  const [makeId, setMakeId] = useState('')
+  const [makeList, setMakeList] = useState([]);
+  const [makeId, setMakeId] = useState('');
 
-  const [modelList, setModelList] = useState([])
-  const [modelId, setModelId] = useState('')
+  const [modelList, setModelList] = useState([]);
+  const [modelId, setModelId] = useState('');
 
-  const [yearList, setYearList] = useState([])
-  const [yearId, setYearId] = useState('')
+  const [yearList, setYearList] = useState([]);
+  const [yearId, setYearId] = useState('');
 
-  const [mileageBody, setMileageBody] = useState('')
+  const [mileageBody, setMileageBody] = useState('');
 
-  const [descriptionBody, setDescriptionBody] = useState('')
+  const [descriptionBody, setDescriptionBody] = useState('');
 
-  const [carCategory, setCarCategory] = useState('')
+  const [carCategory, setCarCategory] = useState('');
 
   useEffect(() => {
-    let ignore = false
+    let ignore = false;
     axios
       .get(
         'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo'
       )
       .then((response) => {
         if (!ignore) {
-          console.log('fetched list of makes')
+          console.log('fetched list of makes', response.data);
           const makes = response.data
             .map((car) => car.Make)
-            .filter((make, index, array) => array.indexOf(make) === index)
-          setMakeList(makes)
-          setMakeId(makes[0])
+            .filter((make, index, array) => array.indexOf(make) === index);
+          setMakeList(makes);
+          setMakeId(makes[0]);
         }
       })
+      .catch((error) => {
+        console.error('Error fetching list of makes:', error);
+      });
     return () => {
-      ignore = true
-    }
-  }, [])
+      ignore = true;
+    };
+  }, []);
 
   useEffect(() => {
-    let ignore = false
+    let ignore = false;
     if (makeId !== '') {
       axios
         .get(
@@ -51,24 +54,27 @@ function CreateNewListing() {
         )
         .then((response) => {
           if (!ignore) {
-            console.log('fetched list of models')
-            setCarCategory(response.data[0].Category)
+            console.log('fetched list of models', response.data);
+            setCarCategory(response.data[0].Category);
             const models = response.data
               .map((car) => car.Model)
-              .filter((model, index, array) => array.indexOf(model) === index)
-            setModelList(models)
-            setModelId(models[0])
+              .filter((model, index, array) => array.indexOf(model) === index);
+            setModelList(models);
+            setModelId(models[0]);
           }
         })
+        .catch((error) => {
+          console.error('Error fetching list of models:', error);
+        });
 
       return () => {
-        ignore = true
-      }
+        ignore = true;
+      };
     }
-  }, [makeId])
+  }, [makeId]);
 
   useEffect(() => {
-    let ignore = false
+    let ignore = false;
     if (modelId !== '') {
       axios
         .get(
@@ -76,20 +82,22 @@ function CreateNewListing() {
         )
         .then((response) => {
           if (!ignore) {
-            console.log('fetched list of years')
+            console.log('fetched list of years', response.data);
             const years = response.data
               .map((car) => car.Year)
-              .filter((year, index, array) => array.indexOf(year) === index)
-            setYearList(years)
-            setYearId(years[0])
-
+              .filter((year, index, array) => array.indexOf(year) === index);
+            setYearList(years);
+            setYearId(years[0]);
           }
         })
+        .catch((error) => {
+          console.error('Error fetching list of years:', error);
+        });
       return () => {
-        ignore = true
-      }
+        ignore = true;
+      };
     }
-  }, [makeId, modelId])
+  }, [makeId, modelId]);
 
   const handleCreateListing = () => {
     // Prepare the data to be sent to the backend
@@ -100,11 +108,9 @@ function CreateNewListing() {
       Category: carCategory,
       Mileage: mileageBody,
       Condition: 'used',
-      Description: descriptionBody, // Replace with actual description input value
+      Description: descriptionBody,
       user: user
-
-      // Image: 'Your image URL here' // Replace with actual image URL or file upload logic
-    }
+    };
 
     // Send the data to the backend route
     axios
@@ -113,31 +119,31 @@ function CreateNewListing() {
         newListing
       )
       .then((response) => {
-        console.log('New listing created successfully:', response.data)
+        console.log('New listing created successfully:', response.data);
         // Handle any success actions here
         Swal.fire({
           icon: 'success',
           title: 'Success',
           text: 'New listing created successfully'
-        })
+        });
       })
       .catch((error) => {
-        console.error('Error creating new listing:', error)
+        console.error('Error creating new listing:', error);
         // Handle any error actions here
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Error creating new listing'
-        })
-      })
-  }
+        });
+      });
+  };
 
   return (
     <>
       <select
         value={makeId}
         onChange={(e) => {
-          setMakeId(e.target.value)
+          setMakeId(e.target.value);
         }}
       >
         {makeList.map((make, index) => (
@@ -149,7 +155,7 @@ function CreateNewListing() {
       <select
         value={modelId}
         onChange={(e) => {
-          setModelId(e.target.value)
+          setModelId(e.target.value);
         }}
       >
         {modelList.map((model, index) => (
@@ -161,7 +167,7 @@ function CreateNewListing() {
       <select
         value={yearId}
         onChange={(e) => {
-          setYearId(e.target.value)
+          setYearId(e.target.value);
         }}
       >
         {yearList.map((year, index) => (
@@ -175,7 +181,7 @@ function CreateNewListing() {
         className="mileage-input"
         placeholder="mileage:"
         onChange={(e) => {
-          setMileageBody(e.target.value)
+          setMileageBody(e.target.value);
         }}
       />
 
@@ -184,7 +190,7 @@ function CreateNewListing() {
         className="car-description"
         placeholder="description:"
         onChange={(e) => {
-          setDescriptionBody(e.target.value)
+          setDescriptionBody(e.target.value);
         }}
       ></input>
       <button className="image-button">Upload Image</button>
@@ -192,7 +198,7 @@ function CreateNewListing() {
         Create New Listing
       </button>
     </>
-  )
+  );
 }
 
-export default CreateNewListing
+export default CreateNewListing;
