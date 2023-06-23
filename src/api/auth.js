@@ -1,18 +1,18 @@
 import api from './apiConfig'
-const LOCALSTORAGE_KEY='token'
+const LOCALSTORAGE_KEY = 'token';
 
 export async function signin(username, password) {
   try {
     const response = await api.post('/auth/signin', { username, password });
     localStorage.setItem(LOCALSTORAGE_KEY, response.data.token);
-    localStorage.setItem('loggedIn', 'true'); // This line is new
+    localStorage.setItem('loggedIn', 'true');
 
     // Store the user data in localStorage, if it's included in the response
     if (response.data.user) {
       localStorage.setItem('user', JSON.stringify(response.data.user));
     }
 
-    console.log(LOCALSTORAGE_KEY);
+    console.log(localStorage.getItem(LOCALSTORAGE_KEY));
     return response.data;
   } catch (error) {
     console.error("Error during signin:", error);
@@ -36,10 +36,10 @@ export async function signup(username, email, password) {
 export async function isTokenValid() {
   try {
     const response = await api.get('/auth/isTokenValid');
-    return response.data;
+    return response.data.success;
   } catch (error) {
     console.error("Error during token validation:", error);
-    return { success: false, error: error.message };
+    return false;
   }
 }
 

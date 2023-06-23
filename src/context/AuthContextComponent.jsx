@@ -1,40 +1,39 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
+import { isTokenValid } from '../api/auth';
 
 export const AuthContext = createContext(null)
 
 export default function AuthContextComponent({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [user, setUser] = useState({})
-  const navigate = useNavigate() // Use the useNavigate hook
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    const loggedIn = localStorage.getItem('loggedIn');
-    setIsLoggedIn(loggedIn);
+    const validateToken = async () => {
+      const token = localStorage.getItem('token');
+      console.log('Token:', token);
+      if (token) {
+        try {
+          const { success } = await isTokenValid();
+          setIsLoggedIn(success);
+        } catch (error) {
+          // Handle the 401 error
+          setIsLoggedIn(false);
+        }
+      }
+    };
   
-    // Retrieve the user object from localStorage
-    const user = localStorage.getItem('user');
-    if (user) {
-      setUser(JSON.parse(user));
-    }
-  }, [])
-
+    validateToken();
+  }, []);
+  
   const signOut = () => {
-    // Clear user data
     setUser({})
-  
-    // Set isLoggedIn to false
     setIsLoggedIn(false)
-  
-    // Remove the token and loggedIn status from localStorage
     localStorage.removeItem('token')
     localStorage.removeItem('loggedIn')
-  
-    // Remove the user object from localStorage
     localStorage.removeItem('user')
-  
-    // Redirect the user to the sign-in page or any other desired location
-    navigate('/auth/signin')
+    // navigate('/auth/signin')
   }
 
   const signIn = (user) => {
