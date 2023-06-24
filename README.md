@@ -1,8 +1,28 @@
 
 
-### **Frontend README for REV RADAR**  ###
+### **REV RADAR**  ###
 Overview
 This README will guide you through the user journey of signing in and navigating the RevRadar app. The app is a React.js application using functional components and hooks, leveraging the react-router-dom library for routing, and implementing Context API for managing global state related to user authentication and car data.
+
+### **Technology Used** ###
+
+* React
+* Tailwind
+* JWT token
+* Axios
+* Sweetalert
+
+### Motivation ###
+
+Showcase React app with seeded database that creates a marketplace for user to buy or sell product. 
+
+### Pre-code Build ###
+
+Include, wireframes, schemas, routes, user stories, team roles, sprints
+
+* Notion:https://www.notion.so/Running-with-the-90s-f796135f92e6481c8a14f66736121ea5
+* Figma: https://www.figma.com/files/project/96547153/Project---Unit--3?fuid=1251579006598339582
+
 
 ### **User Journey** ###
 ### **Signing in**  ###
@@ -38,3 +58,14 @@ CreateNewListing: This component allows a user to create a new car listing.
 CarDetails: This component displays detailed information for a specific car.
 UserCarListings: This component displays a user's car listings.
 UserCarListingsDetails: This component displays detailed information for a specific car listing created by the user.
+
+
+### **Beyond MVP** ###
+
+* Add further authentication
+
+
+### REFERENCES ### 
+
+* Twutter Clone
+* https://tuts.alexmercedcoder.dev/2021/11/Auth_with_express_JWT/
