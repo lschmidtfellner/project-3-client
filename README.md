@@ -51,13 +51,142 @@ Signin.js makes a call to the backend to authenticate the user. FeaturedCars.js 
 
 ### **Key Components**  ###
 AuthContextComponent: This component handles authentication and holds the global state for whether a user is logged in, as well as the user's information.
+
+```
+AuthContext Component
+ useEffect(() => {
+    const loggedIn = localStorage.getItem('loggedIn');
+    setIsLoggedIn(loggedIn);
+  
+    // Retrieve the user object from localStorage
+    const user = localStorage.getItem('user');
+    if (user) {
+      setUser(JSON.parse(user));
+    }
+  }, [])
+  ```
+
+
 CarContextProvider: This component handles the state of the car data, which is shared across components.
 Signin: This component provides the sign-in functionality.
 FeaturedCars: This component fetches and displays a list of featured car listings.
+
+```
+FeaturedCars Excerpt
+
+useEffect(() => {
+    const uniqueMakes = [...new Set(cars.map(car => car.Make))];
+    setMakes(uniqueMakes);
+    console.log('Unique makes:', uniqueMakes);
+  }, [cars]);
+
+  useEffect(() => {
+    if (selectedMake) {
+      const relevantModels = [...new Set(cars.filter(car => car.Make === selectedMake).map(car => car.Model))];
+      setModels(relevantModels);
+      console.log('Relevant models:', relevantModels);
+    } else {
+      setModels([]);
+      setSelectedModel('');
+    }
+  }, [selectedMake, cars]);
+
+  useEffect(() => {
+    if (selectedModel) {
+      const relevantCars = cars.filter(car => car.Make === selectedMake && car.Model === selectedModel);
+      setFilteredCars(relevantCars);
+      console.log('Filtered cars:', relevantCars);
+    } else {
+      setFilteredCars([]);
+    }
+  }, [selectedModel, selectedMake, cars]);
+
+  ```
+
 CreateNewListing: This component allows a user to create a new car listing.
 CarDetails: This component displays detailed information for a specific car.
 UserCarListings: This component displays a user's car listings.
 UserCarListingsDetails: This component displays detailed information for a specific car listing created by the user.
+
+```
+Update new listing excerpt
+
+useEffect(() => {
+    const car = cars.find((car) => car._id === selectedCarId)
+    setCarToUpdate(car)
+  })
+
+  useEffect(() => {
+    let ignore = false
+    axios
+      .get(
+        'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo'
+      )
+      .then((response) => {
+        if (!ignore) {
+          console.log('fetched list of makes')
+          const makes = response.data
+            .map((car) => car.Make)
+            .filter((make, index, array) => array.indexOf(make) === index)
+          setMakeList(makes)
+          setMakeId(makes[0])
+        }
+      })
+    return () => {
+      ignore = true
+    }
+  }, [])
+
+  useEffect(() => {
+    let ignore = false
+    if (makeId !== '') {
+      axios
+        .get(
+          `https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo/search?Make=${makeId}`
+        )
+        .then((response) => {
+          if (!ignore) {
+            console.log('fetched list of models')
+            setCarCategory(response.data[0].Category)
+            const models = response.data
+              .map((car) => car.Model)
+              .filter((model, index, array) => array.indexOf(model) === index)
+            setModelList(models)
+            setModelId(models[0])
+          }
+        })
+
+      return () => {
+        ignore = true
+      }
+    }
+  }, [makeId])
+
+  useEffect(() => {
+    let ignore = false
+    if (modelId !== '') {
+      axios
+        .get(
+          `https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo/search?Make=${makeId}&Model=${modelId}`
+        )
+        .then((response) => {
+          if (!ignore) {
+            console.log('fetched list of years')
+            const years = response.data
+              .map((car) => car.Year)
+              .filter((year, index, array) => array.indexOf(year) === index)
+            setYearList(years)
+            setYearId(years[0])
+
+          }
+        })
+      return () => {
+        ignore = true
+      }
+    }
+  }, [makeId, modelId])
+
+  ```
 
 
 ### **Beyond MVP** ###
