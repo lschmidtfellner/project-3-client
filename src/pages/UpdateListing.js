@@ -31,9 +31,12 @@ function UpdateListing() {
 
   const [carCategory, setCarCategory] = useState('')
 
+  const [selectedImages, setSelectedImages] = useState([]);
+
   useEffect(() => {
     const car = cars.find((car) => car._id === selectedCarId)
     setCarToUpdate(car)
+    setCarCategory(carToUpdate.Category)
   })
 
   useEffect(() => {
@@ -106,6 +109,16 @@ function UpdateListing() {
     }
   }, [makeId, modelId])
 
+  const handleImageUpload = (e) => {
+    const uploadedImages = Array.from(e.target.files);
+    setSelectedImages(uploadedImages);
+    console.log('Selected Images:', uploadedImages);
+  };
+
+  useEffect(() => {
+    console.log('Selected Images:', selectedImages);
+  }, [selectedImages]);
+
   const handleUpdateListing = () => {
     // Extract the user's ObjectId from the user information
     const userId = user._id; // Assuming the user object has an "_id" property containing the ObjectId
@@ -128,31 +141,30 @@ function UpdateListing() {
 
     // Send the data to the backend route
     axios
-      .put(`https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts/${carToUpdate._id}`, formData, {
+      .post('https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((response) => {
-        console.log('New listing created successfully:', response.data);
+        console.log('Listing updated successfully:', response.data);
         // Handle any success actions here
         Swal.fire({
           icon: 'success',
           title: 'Success',
-          text: 'New listing created successfully',
+          text: 'Listing updated successfully',
         });
       })
       .catch((error) => {
-        console.error('Error creating new listing:', error);
+        console.error('Error creating listing:', error);
         // Handle any error actions here
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Error creating new listing',
+          text: 'Error creating listing',
         });
       });
   };
-
 
   return (
     <>
