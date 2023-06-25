@@ -117,7 +117,11 @@ function UpdateListing() {
     console.log('Selected Images:', selectedImages)
   }, [selectedImages])
 
-  const handleUpdateListing = () => {
+  useEffect(() => {
+
+  })
+
+  const handleUpdateListing = async () => {
     // Extract the user's ObjectId from the user information
     const userId = user._id // Assuming the user object has an "_id" property containing the ObjectId
 
