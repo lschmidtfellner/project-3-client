@@ -100,40 +100,42 @@ function CreateNewListing() {
   }, [makeId, modelId]);
 
   const handleImageUpload = (e) => {
-    const selectedImages = Array.from(e.target.files);
-    setSelectedImages(selectedImages);
-    console.log('Selected Images:', selectedImages);
+    const uploadedImages = Array.from(e.target.files);
+    setSelectedImages(uploadedImages);
+    console.log('Selected Images:', uploadedImages);
   };
 
-  const handleCreateListing = () => {
-    // Prepare the data to be sent to the backend
-    const newListing = {
-      Make: makeId,
-      Model: modelId,
-      Year: yearId,
-      Category: carCategory,
-      Mileage: mileageBody,
-      Condition: 'used',
-      Description: descriptionBody,
-      user: user,
-    };
+  useEffect(() => {
+    console.log('Selected Images:', selectedImages);
+  }, [selectedImages]);
 
-    // Create a FormData object to send the data along with the images
+  const handleCreateListing = () => {
+    // Extract the user's ObjectId from the user information
+    const userId = user._id; // Assuming the user object has an "_id" property containing the ObjectId
+
+    // Prepare the data to be sent to the backend
     const formData = new FormData();
-    formData.append('data', JSON.stringify(newListing));
-    selectedImages.forEach((image) => {
+    formData.append('Make', makeId);
+    formData.append('Model', modelId);
+    formData.append('Year', yearId);
+    formData.append('Category', carCategory);
+    formData.append('Mileage', mileageBody);
+    formData.append('Condition', 'used');
+    formData.append('Description', descriptionBody);
+    formData.append('user', userId); // Pass the user's ObjectId value here
+    selectedImages.forEach((image, index) => {
       formData.append('images', image);
     });
 
-    console.log('New Listing:', newListing);
-    console.log('Form Data:', formData);
+    console.log('New Listing FormData:', formData);
 
-    // Send the data and images to the backend route
+    // Send the data to the backend route
     axios
-      .post(
-        'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts',
-        formData
-      )
+      .post('http://localhost:8000/api/saleposts', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       .then((response) => {
         console.log('New listing created successfully:', response.data);
         // Handle any success actions here
@@ -153,6 +155,7 @@ function CreateNewListing() {
         });
       });
   };
+
 
   return (
     <>
