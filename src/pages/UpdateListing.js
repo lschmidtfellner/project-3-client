@@ -3,6 +3,7 @@ import axios from 'axios'
 import { AuthContext } from '../context/AuthContextComponent'
 import Swal from 'sweetalert2'
 import { useLocation } from 'react-router-dom';
+import { CarContext } from '../components/CarContextProvider';
 
 
 function UpdateListing() {
@@ -48,7 +49,7 @@ function UpdateListing() {
             .map((car) => car.Make)
             .filter((make, index, array) => array.indexOf(make) === index)
           setMakeList(makes)
-          setMakeId(makes[0])
+          setMakeId(carToUpdate.Make)
         }
       })
     return () => {
@@ -71,7 +72,7 @@ function UpdateListing() {
               .map((car) => car.Model)
               .filter((model, index, array) => array.indexOf(model) === index)
             setModelList(models)
-            setModelId(models[0])
+            setModelId(carToUpdate.Model)
           }
         })
 
@@ -95,7 +96,7 @@ function UpdateListing() {
               .map((car) => car.Year)
               .filter((year, index, array) => array.indexOf(year) === index)
             setYearList(years)
-            setYearId(years[0])
+            setYearId(carToUpdate.Year)
 
           }
         })
@@ -106,49 +107,59 @@ function UpdateListing() {
   }, [makeId, modelId])
 
   const handleUpdateListing = () => {
+    // Extract the user's ObjectId from the user information
+    const userId = user._id; // Assuming the user object has an "_id" property containing the ObjectId
 
-    const newListing = {
-      Make: makeId,
-      Model: modelId,
-      Year: yearId,
-      Category: carCategory,
-      Mileage: mileageBody,
-      Condition: 'used',
-      Description: descriptionBody,
-      user: user
-    }
+    // Prepare the data to be sent to the backend
+    const formData = new FormData();
+    formData.append('Make', makeId);
+    formData.append('Model', modelId);
+    formData.append('Year', yearId);
+    formData.append('Category', carCategory);
+    formData.append('Mileage', mileageBody);
+    formData.append('Condition', 'used');
+    formData.append('Description', descriptionBody);
+    formData.append('user', userId); // Pass the user's ObjectId value here
+    selectedImages.forEach((image, index) => {
+      formData.append('images', image);
+    });
 
+    console.log('New Listing FormData:', formData);
+
+    // Send the data to the backend route
     axios
-      .put(
-        `https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts/${carToUpdate._id}`,
-        newListing
-      )
+      .put(`https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts/${carToUpdate._id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       .then((response) => {
-        console.log('Listing updated successfully:', response.data)
+        console.log('New listing created successfully:', response.data);
         // Handle any success actions here
         Swal.fire({
           icon: 'success',
           title: 'Success',
-          text: 'Listing updated successfully'
-        })
+          text: 'New listing created successfully',
+        });
       })
       .catch((error) => {
-        console.error('Error updating listing:', error)
+        console.error('Error creating new listing:', error);
         // Handle any error actions here
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Error updating listing'
-        })
-      })
-  }
+          text: 'Error creating new listing',
+        });
+      });
+  };
+
 
   return (
     <>
       <select
         value={makeId}
         onChange={(e) => {
-          setMakeId(e.target.value)
+          setMakeId(e.target.value);
         }}
       >
         {makeList.map((make, index) => (
@@ -160,7 +171,7 @@ function UpdateListing() {
       <select
         value={modelId}
         onChange={(e) => {
-          setModelId(e.target.value)
+          setModelId(e.target.value);
         }}
       >
         {modelList.map((model, index) => (
@@ -172,7 +183,7 @@ function UpdateListing() {
       <select
         value={yearId}
         onChange={(e) => {
-          setYearId(e.target.value)
+          setYearId(e.target.value);
         }}
       >
         {yearList.map((year, index) => (
@@ -185,9 +196,9 @@ function UpdateListing() {
         type="text"
         className="mileage-input"
         placeholder="mileage:"
-        value={carToUpdate.Mileage}
+        value={carToUpdate.Description}
         onChange={(e) => {
-          setMileageBody(e.target.value)
+          setMileageBody(e.target.value);
         }}
       />
 
@@ -195,17 +206,21 @@ function UpdateListing() {
         type="text"
         className="car-description"
         placeholder="description:"
-        value={carToUpdate.Description}
         onChange={(e) => {
-          setDescriptionBody(e.target.value)
+          setDescriptionBody(e.target.value);
         }}
       ></input>
-      <button className="image-button">Upload Image</button>
+      <input type="file" multiple onChange={handleImageUpload} />
+      {selectedImages.map((image, index) => (
+        <div key={index}>
+          <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
+        </div>
+      ))}
       <button className="create-btn" onClick={handleUpdateListing}>
-        Update Listing
+        Create New Listing
       </button>
     </>
-  )
+  );
 }
 
 export default UpdateListing
