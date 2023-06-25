@@ -43,6 +43,7 @@ const UserCarListings = () => {
           <>
             <Link to={`/usercarlistingsdetails?id=${car._id}`} key={car._id}>
               <div>
+              <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + car.images[0]} alt='Car' />
                 <h2>{car.Year} {car.Make} {car.Model}</h2>
                 <p>Mileage: {car.Mileage}</p>
                 <p>Condition: {car.Condition}</p>

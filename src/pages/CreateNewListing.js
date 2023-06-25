@@ -131,7 +131,7 @@ function CreateNewListing() {
 
     // Send the data to the backend route
     axios
-      .post('http://localhost:8000/api/saleposts', formData, {
+      .post('https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

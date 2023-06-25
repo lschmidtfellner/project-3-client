@@ -88,6 +88,8 @@ const FeaturedCars = () => {
         cars.map((car) => (
           <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
             <div>
+              <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + car.images[0]} alt='Car' />
+              {console.log('Car images:', car.images[0])}
               <p>Year: {car.Year}</p>
               <p>Make: {car.Make}</p>
               <p>Model: {car.Model}</p>
