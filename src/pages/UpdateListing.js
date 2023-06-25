@@ -217,7 +217,7 @@ function UpdateListing() {
         </div>
       ))}
       <button className="create-btn" onClick={handleUpdateListing}>
-        Create New Listing
+        Update Listing
       </button>
     </>
   );
