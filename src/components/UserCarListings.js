@@ -49,7 +49,7 @@ const UserCarListings = () => {
               </div>
             </Link>
             {/* CHANGE THIS LINK ONCE LUKE GIVES NEW EDIT FORM ROUTE */}
-            <Link to={`/post?id=${car._id}`}>
+            <Link to={`/updatepost?id=${car._id}`}>
               <button>Edit</button>
             </Link>
             {/* <Link to={`/usercarlistings?id=${car._id}`}> */}

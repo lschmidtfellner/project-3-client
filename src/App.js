@@ -14,6 +14,7 @@ import Nav from './components/Nav'
 import CarDetails from './components/CarDetails'
 import UserCarListings from './components/UserCarListings'
 import UserCarListingsDetails from './components/UserCarListingsDetails'
+import UpdateListing from './pages/UpdateListing'
 
 function App() {
   return (
@@ -47,6 +48,7 @@ const AppContent = () => {
         <Route path='/cardetails' element={isLoggedIn ? <CarDetails /> : <Signin/> } />
         <Route path='/usercarlistings' element={isLoggedIn ? <UserCarListings /> : <Signin/> } />
         <Route path='/usercarlistingsdetails' element={isLoggedIn ? <UserCarListingsDetails /> : <Signin/> } />
+        <Route path='/updatepost' element={isLoggedIn ? <UpdateListing /> : <Signin/> } />
       </Routes>
     </CarContextProvider>
   )
