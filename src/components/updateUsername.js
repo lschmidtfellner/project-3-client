@@ -15,39 +15,28 @@ const UpdateUsername = () => {
         ...newUsername, 
         [name]: value 
     })
-
   }
-
- 
 
   const handleUpdateUsername = async (e) => {
-    e.preventDefault()
-    console.log('submitted', newUsername)
-    await updateUsername(newUsername)
-    setError('');
-    setSuccess(false);
-  }
- 
-
-  
-
-//     try {
-//       const response = localStorage.getitem('token'); // Get the user ID from your frontend state or context
-//       await updateUsername(userId, newUsername);
-//       console.log('Username updated successfully');
-//       setSuccess(true);
-//     } catch (error) {
-//       console.error('Error updating username:', error.message);
-//       setError(error.message);
-//     }
-//   };
+    e.preventDefault();
+    console.log('submitted', newUsername);
+    try {
+      await updateUsername(newUsername);
+      setError('');
+      setSuccess(true);
+      // reload the page once updateUsername has successfully completed
+      window.location.reload(); 
+    } catch (error) {
+      console.error('Error updating username:', error);
+      setError(error.message);
+    }
+  };
 
   return (
     <div>
       <h2>Update Username</h2>
      <form>
       <input
-
         type="text"
         value={newUsername.username}
         name = 'username'

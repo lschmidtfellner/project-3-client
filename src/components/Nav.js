@@ -16,6 +16,10 @@ function Navbar() {
   const handleUpdateUsernameClick = () => {
     setShowUpdateUsername(true);
   };
+  
+  const handleCloseUpdateUsername = () => {
+    setShowUpdateUsername(false);
+  };
 
   return (
     <nav className="navbar">
