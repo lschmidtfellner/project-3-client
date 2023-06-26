@@ -46,3 +46,20 @@ export async function isTokenValid() {
 export async function getCarDetails() {
   
 }
+export async function updateUsername(newUsername) {
+  try {
+    const token = localStorage.getItem('token');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    
+    console.log(headers, 'headers');
+    const response = await api.put('auth/updateUsername', newUsername, { headers });
+    console.log('Username updated successfully:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating username:', error);
+    throw new Error(error.response.data.error);
+  }
+}
+
