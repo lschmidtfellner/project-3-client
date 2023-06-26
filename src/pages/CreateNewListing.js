@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContextComponent';
 import Swal from 'sweetalert2';
@@ -22,6 +23,9 @@ function CreateNewListing() {
   const [carCategory, setCarCategory] = useState('');
 
   const [selectedImages, setSelectedImages] = useState([]);
+
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let ignore = false;
@@ -143,6 +147,10 @@ function CreateNewListing() {
           icon: 'success',
           title: 'Success',
           text: 'New listing created successfully',
+
+        }).then(() => {
+          navigate('/');
+
         });
       })
       .catch((error) => {
@@ -159,68 +167,87 @@ function CreateNewListing() {
 
   return (
     <>
-      <select
-        value={makeId}
-        onChange={(e) => {
-          setMakeId(e.target.value);
-        }}
-      >
-        {makeList.map((make, index) => (
-          <option key={index} value={make}>
-            {make}
-          </option>
-        ))}
-      </select>
-      <select
-        value={modelId}
-        onChange={(e) => {
-          setModelId(e.target.value);
-        }}
-      >
-        {modelList.map((model, index) => (
-          <option key={index} value={model}>
-            {model}
-          </option>
-        ))}
-      </select>
-      <select
-        value={yearId}
-        onChange={(e) => {
-          setYearId(e.target.value);
-        }}
-      >
-        {yearList.map((year, index) => (
-          <option key={index} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
-      <input
-        type="text"
-        className="mileage-input"
-        placeholder="mileage:"
-        onChange={(e) => {
-          setMileageBody(e.target.value);
-        }}
-      />
-
-      <input
-        type="text"
-        className="car-description"
-        placeholder="description:"
-        onChange={(e) => {
-          setDescriptionBody(e.target.value);
-        }}
-      ></input>
-      <input type="file" multiple onChange={handleImageUpload} />
-      {selectedImages.map((image, index) => (
-        <div key={index}>
-          <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
+   <div className="w-full mx-auto overflow-x-hidden">
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-wrap justify-center items-center w-full yellow mb-8 py-8">
+          <h1 className="text-center text-3xl blue font-bold my-8">Create New Lising</h1>
         </div>
-      ))}
-      <button className="create-btn" onClick={handleCreateListing}>
-        Create New Listing
-      </button>
+        
+        <div className="mt-2 w-full ml-3 text-left mx-auto">
+        
+        <label className="text-gray-600">make: </label>
+          <select className="blue rounded-full ml-2 mb-8 text-base"
+            value={makeId}
+            onChange={(e) => {
+              setMakeId(e.target.value);
+            }}
+          >
+            {makeList.map((make, index) => (
+              <option key={index} value={make}>
+                {make}
+              </option>
+            ))}
+          </select>
+          <br></br>
+          <label className="text-gray-600">model: </label>
+          <select className="blue rounded-full mb-8"
+            value={modelId}
+            onChange={(e) => {
+              setModelId(e.target.value);
+            }}
+          >
+            {modelList.map((model, index) => (
+              <option key={index} value={model}>
+                {model}
+              </option>
+            ))}
+          </select>
+          <br></br>
+          <label className="text-gray-600">year: </label>
+          <select className="ml-3 blue rounded-full mb-8"
+            value={yearId}
+            onChange={(e) => {
+              setYearId(e.target.value);
+            }}
+          >
+            {yearList.map((year, index) => (
+              <option key={index} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+          <div className="lg:w-2/5 md:w-2/5 w-4/5 mx-auto">
+          <input className="block w-full blue rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-8 mileage-input"
+            type="text"
+            placeholder="mileage:"
+            onChange={(e) => {
+              setMileageBody(e.target.value);
+            }}
+          />
+
+          <input className="block w-full rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-8 mileage-input my-6 car-description"
+            type="text"
+            placeholder="description:"
+            onChange={(e) => {
+              setDescriptionBody(e.target.value);
+            }}
+          ></input>
+          <input className="my-6"
+          type="file" multiple onChange={handleImageUpload} />
+          {selectedImages.map((image, index) => (
+            <div key={index}>
+              <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
+            </div>
+          ))}
+
+          <button className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-2/5  text-white font-bold  hover:text-black mt-8 mr-8 create-btn" onClick={handleCreateListing}>
+           create listing
+          </button>
+            </div>
+         
+        </div>
+      </div>
+      </div>
     </>
   );
 }
