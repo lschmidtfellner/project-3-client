@@ -33,27 +33,7 @@ function Navbar() {
   }, []);
 
 
-  // return (
-  //   <nav className="navbar">
-  //     <ul className="hamburger">
-  //       <li>
-  //         <Link to="/">Home/Feed</Link>
-  //       </li>
-  //       <li>
-  //         <Link to="/usercarlistings">Your Listings</Link>
-  //       </li>
-  //       <li>
-  //         <Link to="/post">Create New Listing</Link>
-  //       </li>
-  //       <li>
-  //         <button onClick={handleSignOut}>Sign Out</button>
-  //       </li>
-  //     </ul>
-  //     <div className="logo">
-  //       <h3>Logo</h3>
-  //     </div>
-  //   </nav>
-  // );
+ 
   return (
   <nav className={`navbar fixed top-0 w-full py-4 bg-white shadow-md ${
     isNavbarFolded ? 'translate-y-0' : '-translate-y-full'
@@ -111,7 +91,7 @@ function Navbar() {
       <Link to="/post" className="blue font-bold  hover:text-black">create new listing</Link>
       </li>
       <li className="flex-grow">
-      <button onClick={handleSignOut} className="blue font-bold hover:text-black text-xs">Sign Out</button>
+      <button onClick={handleSignOut} className="blue font-bold hover:text-black text-xs">sign out</button>
       </li>
     </ul>
     </div>

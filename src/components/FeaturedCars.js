@@ -81,7 +81,7 @@ const FeaturedCars = () => {
         filteredCars.map((car) => (
           <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
             <div className="my-20 ml-3 text-left">
-                <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + car.images[0]} alt='Car' className="pb-8" />
+              <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + car.images[0]} alt='Car' className="pb-8" />
               <h2 className="text-xl blue uppercase">{car.Year} {car.Make} {car.Model}</h2>
               <p>mileage: {car.Mileage}</p>
               <p>condition: {car.Condition}</p>
@@ -93,7 +93,7 @@ const FeaturedCars = () => {
         cars.map((car) => (
           <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
             <div className="my-20 ml-3 text-left">
-              <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + car.images[0]} alt='Car'  className="pb-8" />
+              <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + car.images[0]} alt='Car' className="pb-8" />
               <h2 className="text-xl blue uppercase">{car.Year} {car.Make} {car.Model}</h2>
               <p>mileage: {car.Mileage}</p>
               <p>condition: {car.Condition}</p>

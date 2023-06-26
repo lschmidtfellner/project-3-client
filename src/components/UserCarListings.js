@@ -54,7 +54,7 @@ const UserCarListings = () => {
             </Link>
             {/* CHANGE THIS LINK ONCE LUKE GIVES NEW EDIT FORM ROUTE */}
             <div className="text-center w-full">
-              <Link to={`/post?id=${car._id}`}>
+              <Link to={`/updatepost?id=${car._id}`}>
                 <button className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3  text-white font-bold  hover:text-black mt-8 mr-8">edit</button>
               </Link>
               {/* <Link to={`/usercarlistings?id=${car._id}`}> */}
@@ -71,7 +71,7 @@ const UserCarListings = () => {
       {/* CHANGE THIS LINK ONCE LUKE GIVES NEW CREATE FORM ROUTE */}
       <>
         <Link className="mt-8 w-full" to="/post">
-          <button className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3 text-white font-bold  hover:text-black mt-14 mb-14 mr-8 ">new listing</button>
+          <button className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-2/5 text-white font-bold  hover:text-black mt-14 mb-14 mr-8 ">create listing</button>
         </Link>
       </>
 

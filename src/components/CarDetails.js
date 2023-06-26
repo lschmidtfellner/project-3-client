@@ -56,10 +56,12 @@ const CarDetails = () => {
 
   return (
     <div className="w-full mx-auto">
+      <div className="flex flex-wrap justify-center items-center w-full yellow mb-8 py-8">
       <h1 className="text-center text-3xl blue font-bold my-8">Featured Car</h1>
+      </div>
       <div key={selectedCar._id}>
-        <div className="mt-10 ml-3 text-left w-full">
-          <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + selectedCar.images[0]} alt='Car' />
+        <div className="mt-16 ml-3 text-left w-full">
+          <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + selectedCar.images[0]} alt='Car' className="pb-8"/>
           <h2 className="text-2xl blue uppercase">{selectedCar.Year} {selectedCar.Make} {selectedCar.Model}</h2>
           <p>mileage: {selectedCar.Mileage}</p>
           <p>condition: {selectedCar.Condition}</p>

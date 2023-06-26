@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { signup } from '../api/auth';
 import Modal from 'react-modal';
 import LottieAnimation from '../components/LottieAnimation';
+import Swal from 'sweetalert2'
 
 Modal.setAppElement('#root')
 
@@ -11,6 +13,7 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -19,6 +22,15 @@ export default function Signup() {
       if (response.status === 200) {
         setSignupSuccess(true);
       }
+      setTimeout(() => {
+        window.location.reload()
+    }, 2000)
+    Swal.fire({
+        icon: 'success',
+        title: "You have successfully deleted this posting!"
+    }).then(() => {
+      navigate('/auth/signin');
+    });
     } catch (error) {
       console.log("Error during signup:", error);
     }
