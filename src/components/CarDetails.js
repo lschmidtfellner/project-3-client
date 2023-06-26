@@ -60,12 +60,16 @@ const CarDetails = () => {
       <h1 className="text-center text-3xl blue font-bold my-8">Featured Car</h1>
       </div>
       <div key={selectedCar._id}>
-        <div className="mt-16 ml-3 text-left w-full">
-          <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + selectedCar.images[0]} alt='Car' className="pb-8"/>
-          <h2 className="text-2xl blue uppercase">{selectedCar.Year} {selectedCar.Make} {selectedCar.Model}</h2>
+        <div className="my-20 text-left border-b px-4">
+        <div className="rounded overflow-hidden shadow-lg">
+          <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + selectedCar.images[0]} alt='Car' className="pb-8 mx-auto"/>
+          </div>
+          <div className="ml-3 mt-8">
+          <h2 className="text-lg blue uppercase">{selectedCar.Year} {selectedCar.Make} {selectedCar.Model}</h2>
           <p>mileage: {selectedCar.Mileage}</p>
           <p>condition: {selectedCar.Condition}</p>
           <p>description: {selectedCar.Description}</p>
+          </div>
           <button onClick={generateEmailAddress} className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3  text-white font-bold  hover:text-black mt-4"><a href={`mailto:${emailAddress}`}>contact seller</a></button>
         </div>
       </div>

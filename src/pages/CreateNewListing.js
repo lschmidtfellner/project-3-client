@@ -170,7 +170,8 @@ function CreateNewListing() {
           <h1 className="text-center text-3xl blue font-bold my-8">Create New Lising</h1>
         </div>
         
-        <div className="mt-2 w-full ml-3 text-left">
+        <div className="mt-2 w-full ml-3 text-left mx-auto">
+        
         <label className="text-gray-600">make: </label>
           <select className="blue rounded-full ml-2 mb-8 text-base"
             value={makeId}
