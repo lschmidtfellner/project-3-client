@@ -24,6 +24,7 @@ function CreateNewListing() {
 
   const [selectedImages, setSelectedImages] = useState([]);
 
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -146,8 +147,10 @@ function CreateNewListing() {
           icon: 'success',
           title: 'Success',
           text: 'New listing created successfully',
+
         }).then(() => {
           navigate('/');
+
         });
       })
       .catch((error) => {
