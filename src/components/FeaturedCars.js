@@ -52,47 +52,52 @@ const FeaturedCars = () => {
   };
 
   return (
-    <div>
-      <h1>Featured Cars</h1>
-      <div>
-        <label>Make: </label>
-        <select value={selectedMake} onChange={e => setSelectedMake(e.target.value)}>
-          <option value=''>Select Make</option>
-          {makes.map(make => <option key={make} value={make}>{make}</option>)}
-        </select>
-      </div>
-      {selectedMake &&
-        <div>
-          <label>Model: </label>
-          <select value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
-            <option value=''>Select Model</option>
-            {models.map(model => <option key={model} value={model}>{model}</option>)}
+    <div className="w-full mx-auto">
+      <div className="flex flex-wrap justify-center items-center w-full yellow mb-8 py-8">
+        <h1 className="text-center text-3xl blue font-bold my-8">Featured Cars</h1>
+        <div className="mt-2 w-full text-center">
+          <label className="text-gray-600">make: </label>
+          <select className="blue rounded-full ml-2 text-base" value={selectedMake} onChange={e => setSelectedMake(e.target.value)}>
+            <option value=''>select make</option>
+            {makes.map(make => <option key={make} value={make}>{make}</option>)}
           </select>
         </div>
-      }
-      <button onClick={handleApply}>Apply</button>
-      <button onClick={handleReset}>Reset</button>
+        {selectedMake &&
+          <div className="mt-2 w-full text-center">
+            <label className="text-gray-600">model: </label>
+            <select className="blue rounded-full" value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
+              <option value=''>select model</option>
+              {models.map(model => <option key={model} value={model}>{model}</option>)}
+            </select>
+          </div>
+        }
+        <div className="text-center w-full">
+          <button onClick={handleApply} className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3  text-white font-bold  hover:text-black mt-8 mr-8">apply</button>
+          <button onClick={handleReset} className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3  text-white font-bold  hover:text-black mt-4">reset</button>
+        </div>
+      </div>
+
       {filterApplied ? (
         filteredCars.map((car) => (
           <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
-            <div>
-              <p>Year: {car.Year}</p>
-              <p>Make: {car.Make}</p>
-              <p>Model: {car.Model}</p>
-              <p>Mileage: {car.Mileage}</p>
-              <p>Condition: {car.Condition}</p>
+            <div className="my-20 ml-3 text-left">
+                <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + car.images[0]} alt='Car' className="pb-8" />
+              <h2 className="text-xl blue uppercase">{car.Year} {car.Make} {car.Model}</h2>
+              <p>mileage: {car.Mileage}</p>
+              <p>condition: {car.Condition}</p>
+              <span className="hr"></span>
             </div>
           </Link>
         ))
       ) : (
         cars.map((car) => (
           <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
-            <div>
-              <p>Year: {car.Year}</p>
-              <p>Make: {car.Make}</p>
-              <p>Model: {car.Model}</p>
-              <p>Mileage: {car.Mileage}</p>
-              <p>Condition: {car.Condition}</p>
+            <div className="my-20 ml-3 text-left">
+              <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + car.images[0]} alt='Car'  className="pb-8" />
+              <h2 className="text-xl blue uppercase">{car.Year} {car.Make} {car.Model}</h2>
+              <p>mileage: {car.Mileage}</p>
+              <p>condition: {car.Condition}</p>
+              <span className="hr"></span>
             </div>
           </Link>
         ))
