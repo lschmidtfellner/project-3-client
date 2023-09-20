@@ -3,45 +3,42 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signin } from '../api/auth';
 import { AuthContext } from '../context/AuthContextComponent';
 import LottieAnimation from '../components/LottieAnimation';
+import Swal from 'sweetalert2';  // Import Swal
 
 export default function Signin() {
-  const [text, setText] = useState('')
-  const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState('') // New state variable for error message
-  const navigate = useNavigate()
-  const { setIsLoggedIn, setUser } = useContext(AuthContext)
-
-
+  const [text, setText] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const { setIsLoggedIn, setUser } = useContext(AuthContext);
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      // Make a request to the server to authenticate the user
-      const response = await signin(text, password)
+      const response = await signin(text, password);
 
-      setUser(response.user)
+      setUser(response.user);
 
       if (response.error) {
-        // Authentication failed - user does not exist
-        setErrorMessage('User does not exist.')
+        Swal.fire({  // Use Swal here
+          icon: 'error',
+          title: 'Error!',
+          text: 'User does not exist.'
+        });
       } else {
-        // Authentication succeeded
-        const { token } = response
-        // Store the token in local storage
-        localStorage.setItem('token', token)
-        localStorage.setItem('loggedIn', true)
-        // Set the authentication state to true
-        setIsLoggedIn(true)
-        // Set user
-
-        // Redirect the user to the authenticated route
-        navigate('/')
+        const { token } = response;
+        localStorage.setItem('token', token);
+        localStorage.setItem('loggedIn', true);
+        setIsLoggedIn(true);
+        navigate('/');
       }
     } catch (error) {
-      // Handle authentication errors
-      console.error('Authentication failed:', error)
-      setErrorMessage('Authentication failed. Please try again.') // Set a generic error message
+      console.error('Authentication failed:', error);
+      Swal.fire({  // Use Swal here
+        icon: 'error',
+        title: 'Error!',
+        text: 'Authentication failed. Please try again.'
+      });
     }
   }
 
