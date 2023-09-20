@@ -17,6 +17,16 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    // Check if any of the fields are empty
+    if (!username || !email || !password) {
+      Swal.fire({
+        icon: 'warning',
+        title: "All fields are required!"
+      });
+      return; // This prevents the rest of the function from executing
+    }
+
     try {
       const response = await signup(username, email, password);
       if (response.status === 200) {
@@ -24,13 +34,13 @@ export default function Signup() {
       }
       setTimeout(() => {
         window.location.reload()
-    }, 2000)
-    Swal.fire({
-        icon: 'success',
-        title: "You have successfully deleted this posting!"
-    }).then(() => {
-      navigate('/auth/signin');
-    });
+      }, 2000)
+      Swal.fire({
+          icon: 'success',
+          title: "You have successfully signed up!"
+      }).then(() => {
+        navigate('/auth/signin');
+      });
     } catch (error) {
       console.log("Error during signup:", error);
     }
@@ -45,7 +55,7 @@ export default function Signup() {
       <div className="lg:w-1/3 md:w-1/3 w-full mx-auto bg-white">
         <LottieAnimation />
       </div>
-      <form onSubmit={handleSubmit} className="placeholder:">
+      <form onSubmit={handleSubmit}>
         <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-indigo-600 mt-16 mb-10">
           Create an account
         </h2>
@@ -76,15 +86,11 @@ export default function Signup() {
               <span className="ml-2 mt-4 lg:w-1/6 md:w-1/6">
                 {"Already a user? "}
                 <Link to="/auth/signin" className="text-indigo-600 hover:text-black">Signin</Link>
-                {/* {" instead."} */}
               </span>
             )}
           </div>
         </div>
-      </form >
+      </form>
     </div>
-
   )
 }
-
-
