@@ -46,7 +46,7 @@ const AppContent = () => {
         <Route path="/" element={<FeaturedCars />} />
         <Route path="/post" element={isLoggedIn ? <CreateNewListing /> : <Signin />} />
         <Route path='/cardetails' element={ <CarDetails /> } />
-        <Route path='/usercarlistings' element={ <UserCarListings /> } />
+        <Route path='/usercarlistings' element={ isLoggedIn ? <UserCarListings/> : <Signin/> } />
         <Route path='/usercarlistingsdetails' element={ <UserCarListingsDetails /> } />
         <Route path='/updatepost' element={isLoggedIn ? <UpdateListing /> : <Signin />} />
       </Routes>
