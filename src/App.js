@@ -37,9 +37,9 @@ const AppContent = () => {
 
   return (
     <CarContextProvider>
-      {isLoggedIn ? (
+     
         <Nav className="block" isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      ) : null}
+      
       <Routes>
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/signin" element={<Signin />} />
