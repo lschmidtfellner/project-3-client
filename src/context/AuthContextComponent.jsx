@@ -10,7 +10,7 @@ export default function AuthContextComponent({ children }) {
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('loggedIn');
-    setIsLoggedIn(loggedIn);
+    setIsLoggedIn(loggedIn==="true");
   
     // Retrieve the user object from localStorage
     const user = localStorage.getItem('user');
