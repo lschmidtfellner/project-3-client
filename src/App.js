@@ -24,7 +24,6 @@ function App() {
 
 const AppContent = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-  const {isMenuOpen, setIsMenuOpen } = useState(false)
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,7 +37,7 @@ const AppContent = () => {
 
   return (
     <CarContextProvider>
-        <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Nav/>
       
       <Routes>
         <Route path="/auth/signup" element={<Signup />} />

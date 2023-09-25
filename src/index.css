@@ -3,13 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --off-white: #EDE9E6;
   --yellow: #ffff33;
   --blue: #079BF5;
   --blue-bg:#079BF5;
   --pink: #FB48C4;
   --pink-bg: #FB48C4;
-  
+}
+
+.nav {
+  background-color: #EDE9E6;
+  border-bottom: 1px solid black;
 }
 
 
