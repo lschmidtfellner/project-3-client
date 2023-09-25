@@ -1,5 +1,5 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import { CarContextProvider } from './components/CarContextProvider';
@@ -24,6 +24,7 @@ function App() {
 
 const AppContent = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const {isMenuOpen, setIsMenuOpen } = useState(false)
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -37,8 +38,7 @@ const AppContent = () => {
 
   return (
     <CarContextProvider>
-     
-        <Nav className="block" isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       
       <Routes>
         <Route path="/auth/signup" element={<Signup />} />

@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  --off-white: #EDE9E6;
   --yellow: #ffff33;
   --blue: #079BF5;
   --blue-bg:#079BF5;
@@ -20,11 +21,6 @@ body {
   font-family: 'Prompt', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-html, body {
-  height: 100vh;
-  width: 100vw;
 }
 
 img, video {
@@ -71,10 +67,6 @@ code {
 
 .pink-bg {
   background-color: var(--pink-bg);
-}
-
-svg {
-  fill: white;
 }
 
 select.blue, select.blue:focus, select.blue:active, select.blue:focus-visible {
