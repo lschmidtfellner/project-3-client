@@ -90,7 +90,7 @@ const FeaturedCars = () => {
           </select>
         </div>
         {selectedMake && (
-          <div className="mt-2 w-full text-center">
+          <div style={{ display: showFilter ? 'block' : 'none' }} className="mt-2 w-full text-center">
             <label className="text-gray-600">model: </label>
             <select
               className="blue rounded-full"
