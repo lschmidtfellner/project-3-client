@@ -56,6 +56,7 @@ const UserCarListings = () => {
                 <h2 className="text-lg blue uppercase">{car.Year} {car.Make} {car.Model}</h2>
                 <p>mileage: {car.Mileage}</p>
                 <p className="pb-8">condition: {car.Condition}</p>
+                <p className="pb-8">price: ${car.price}</p>
                 </div>
               </div>
             </Link>
