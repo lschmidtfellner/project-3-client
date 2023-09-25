@@ -11,7 +11,10 @@ const UserCarListings = () => {
   console.log(cars)
   console.log(user)
 
-  const userCars = cars.filter((car) => car.user === user._id);
+  const userCars = cars
+  .filter((car) => car.user === user._id)
+  .sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));  // assuming dateCreated is the key where the creation date is stored
+
   console.log(user)
   console.log(userCars)
 
