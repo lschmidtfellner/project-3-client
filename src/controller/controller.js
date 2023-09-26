@@ -8,8 +8,8 @@ export function uploadImage(file, setFileData, setPostReady) {
         return false
     }
 
-    const cloudinaryName = ''
-    const uploadPreset = ''
+    const cloudinaryName = 'djwk2wjue'
+    const uploadPreset = 'nyfw81ky'
 
     const formData = new FormData()
     formData.append("file", file[0])
