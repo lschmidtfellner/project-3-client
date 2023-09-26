@@ -1,106 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContextComponent';
-import LottieAnimation from './LottieAnimation';
+import React, { useState } from 'react'
+import revLogo from '../assets/revlogo.png'
+import { ReactComponent as Hamburger } from '../assets/revmenu.svg'
+import { ReactComponent as CloseX } from '../assets/revx.svg'
+import { useNavigate } from 'react-router-dom'
 
-function Navbar() {
-  const navigate = useNavigate();
-  const { signOut } = useContext(AuthContext);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isNavbarFolded, setIsNavbarFolded] = useState(false);
-  
-    const toggleMenu = () => {
-      setIsMenuOpen(!isMenuOpen);
-    };
+function Nav({ isLoggedin, setIsLoggedIn }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const navigate = useNavigate()
+  const menuToggle = () => {
+    setIsMenuOpen((prev) => !prev)
+  }
+  const handleNavigate = (path) => {
+    navigate(path)
+    menuToggle()
+  }
 
-  const handleSignOut = () => {
-    signOut();
-    navigate('/auth/signin');
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const isTop = window.scrollY === 0;
-      setIsNavbarFolded(!isTop);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-
- 
   return (
-  <nav className={`navbar fixed top-0 w-full py-4 bg-white shadow-md ${
-    isNavbarFolded ? 'translate-y-0' : '-translate-y-full'
-  } transition-transform duration-300`}>
-    
-  <div className="hidden lg:flex md:flex">
-  <div className="container mx-auto flex justify-center">
-    <ul className="flex justify-center text-center items-center w-full py-2">
-      <li className="flex-grow">
-      <Link to="/" className="blue hover:text-black">home</Link>
-      </li>
-      <li className="flex-grow">
-      <Link to="/usercarlistings" className="blue hover:text-black">your listings</Link>
-      </li>
-      <li className="flex-grow">
-      <h1 className="text-center text-5xl pink">REV RADAR</h1>
-      </li>
-      <li className="flex-grow">
-      <Link to="/post" className="blue hover:text-black">create new listing</Link>
-      </li>
-      <li className="flex-grow">
-      <button onClick={handleSignOut} className="blue hover:text-black text-xs">Sign Out</button>
-      </li>
-    </ul>
-  </div>
-  </div>
-  {/* Start Mobile View */}
-  <div className="lg:hidden md:hidden flex justify-around items-center mt-6">
-      <h1 className={`text-center pink ${isMenuOpen ? 'text-2xl' : 'text-4xl'}`}>REV RADAR</h1>
-  <button
-      type="button"
-      className="block blue hover:text-black focus:text-black ml-3"
-      onClick={toggleMenu}
-    >
-      <svg
-        className="h-6 w-6 blue-bg"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M3 5h18v2H3V5zm0 6h18v2H3v-2zm0 6h18v2H3v-2z"
-        />
-      </svg>
-    </button>
-    <ul className={`md:flex ${isMenuOpen ? 'text-sm block ml-3' : 'hidden'}`}>
-    <li className="flex-grow">
-      <Link to="/" className="blue font-bold hover:text-black">home</Link>
-      </li>
-      <li className="flex-grow">
-      <Link to="/usercarlistings" className="blue font-bold  hover:text-black">your listings</Link>
-      </li>
-      <li className="flex-grow">
-      <Link to="/post" className="blue font-bold  hover:text-black">create new listing</Link>
-      </li>
-      <li className="flex-grow">
-      <button onClick={handleSignOut} className="blue font-bold hover:text-black text-xs">sign out</button>
-      </li>
-    </ul>
+    <div>
+      <div onClick={() => menuToggle()} style={{display: isMenuOpen ? 'block' : 'none'}} className='overlay bg-[#000000] fixed opacity-50 top-0 right-0 bottom-0 left-0'>
+      </div>
+      <div style={{display: isMenuOpen ? 'block' : 'none'}} className='bg-off-white fixed top-[90px] py-10 leading-10 right-0 left-0 text-center text-2xl border-b border-black'>
+          <h2 onClick={() => handleNavigate('/')}>Home</h2>
+          <h2 onClick={() => handleNavigate('/usercarlistings')}>Your Listings</h2>
+          <h2 onClick={() => handleNavigate('/post')}>Create Listing</h2>
+          {isLoggedin ? <h2>Sign Out</h2> : <h2>Sign In</h2>}
+        </div>
+      <div className="fixed bg-off-white border-b border-black flex items-center nav h-[90px] w-full">
+        <div className="flex justify-between w-full px-5">
+          <div className="w-6" />
+          <img src={revLogo} alt="Rev Logo" className="h-7 w-auto" />
+          <div className="w-8 flex items-end justify-end">
+            {isMenuOpen ? (
+              <CloseX
+                className="h-6 align-right"
+                onClick={() => menuToggle()}
+              />
+            ) : (
+              <Hamburger
+                className="h-6 align-right"
+                onClick={() => menuToggle()}
+              />
+            )}
+          </div>
+        </div>
+      </div>
     </div>
-    {/* <div className="lg:w-1/3 md:w-1/3 w-full mx-auto bg-white"> */}
-        {/* <LottieAnimation />Render the LottieAnimation component */}
-        {/* <LottieAnimation />
-      </div> */}
-</nav>
-);
+  )
 }
 
-export default Navbar;
+export default Nav
