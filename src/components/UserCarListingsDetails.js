@@ -7,6 +7,7 @@ import { AuthContext } from '../context/AuthContextComponent';
 import { CarContext } from '../components/CarContextProvider';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+import { serverUrl } from '../controller/controller';
 
 
 const UserCarListingsDetails = () => {
@@ -33,7 +34,7 @@ const UserCarListingsDetails = () => {
     const handleDelete = (id) => {
         // Add your delete logic here
 
-        axios.delete(`https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts/${id}`) // replace with actual API endpoint
+        axios.delete(`${serverUrl}api/saleposts/${id}`) // replace with actual API endpoint
             .then(() => {
                 // Remove the deleted car from the local state
                 const updatedCars = cars.filter((car) => car._id !== id);
@@ -62,7 +63,7 @@ const UserCarListingsDetails = () => {
                     {/* <div className="mt-20 ml-3 text-left"> */}
                     <div className="mt-20 text-left border-b px-4">
                          <div className="rounded overflow-hidden shadow-lg">
-                        <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + selectedCar.images[0]} alt='Car' className="pb-8 mx-auto" />
+                        <img src={selectedCar.image} alt='Car' className="pb-8 mx-auto" />
                         </div>
                         <div className="ml-3 mt-8">
                         <h2 className="text-xl blue uppercase">{selectedCar.Year} {selectedCar.Make} {selectedCar.Model}</h2>

@@ -62,7 +62,7 @@ const CarDetails = () => {
       <div key={selectedCar._id}>
         <div className="my-20 text-left border-b px-4">
         <div className="rounded overflow-hidden shadow-lg">
-          <img src={'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' + selectedCar.images[0]} alt='Car' className="pb-8 mx-auto"/>
+          <img src={selectedCar.image} alt='Car' className="pb-8 mx-auto"/>
           </div>
           <div className="ml-3 mt-8">
           <h2 className="text-lg blue uppercase">{selectedCar.Year} {selectedCar.Make} {selectedCar.Model}</h2>

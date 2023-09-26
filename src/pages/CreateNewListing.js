@@ -4,6 +4,8 @@ import axios from 'axios';
 import { AuthContext } from '../context/AuthContextComponent';
 import Swal from 'sweetalert2';
 
+import { uploadImage, serverUrl } from '../controller/controller';
+
 function CreateNewListing() {
   const { user } = useContext(AuthContext);
 
@@ -23,6 +25,10 @@ function CreateNewListing() {
   const [carCategory, setCarCategory] = useState('');
 
   const [selectedImages, setSelectedImages] = useState([]);
+
+  const [file, setFile] = useState([]);
+  const [fileData, setFileData] = useState({});
+  const [postReady, setPostReady] = useState(false);
 
 
   const navigate = useNavigate();
@@ -106,6 +112,7 @@ function CreateNewListing() {
   const handleImageUpload = (e) => {
     const uploadedImages = Array.from(e.target.files);
     setSelectedImages(uploadedImages);
+    setFile(e.target.files);
     console.log('Selected Images:', uploadedImages);
   };
 
@@ -113,7 +120,16 @@ function CreateNewListing() {
     console.log('Selected Images:', selectedImages);
   }, [selectedImages]);
 
+  useEffect(() => {
+    if (postReady && file.length > 0) handleCreateListing()
+  }, [postReady])
+
   const handleCreateListing = () => {
+    if (!postReady) {
+      uploadImage(file, setFileData, setPostReady)
+      return
+    }
+    
     // Extract the user's ObjectId from the user information
     const userId = user._id; // Assuming the user object has an "_id" property containing the ObjectId
 
@@ -127,15 +143,16 @@ function CreateNewListing() {
     formData.append('Condition', 'used');
     formData.append('Description', descriptionBody);
     formData.append('user', userId); // Pass the user's ObjectId value here
-    selectedImages.forEach((image, index) => {
-      formData.append('images', image);
-    });
+    formData.append('image', fileData.url)
+    // selectedImages.forEach((image, index) => {
+    //   formData.append('images', image);
+    // });
 
     console.log('New Listing FormData:', formData);
 
     // Send the data to the backend route
     axios
-      .post('https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/saleposts', formData, {
+      .post(`${serverUrl}api/saleposts`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
