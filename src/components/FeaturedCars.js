@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CarContext } from '../components/CarContextProvider';
-import { serverUrl } from '../controller/controller';
 import { ReactComponent as FilterSvg } from '../assets/revfilter.svg'
 const FeaturedCars = () => {
   const { cars } = useContext(CarContext)
@@ -112,7 +111,7 @@ const FeaturedCars = () => {
         </div>
       </div>
       {filterApplied ? (
-        filteredCars.map((car, index) => (
+        filteredCars.map((car) => (
           <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
             <div className="my-20 text-left border-b px-4">
               <div className="rounded overflow-hidden shadow-lg">
@@ -137,10 +136,7 @@ const FeaturedCars = () => {
               <div className="my-20 text-left border-b px-4">
                 <div className="rounded overflow-hidden shadow-lg">
                   <img
-                    src={
-                      
-                      car.image
-                    }
+                    src={car.image}
                     alt="Car"
                     className="pb-8 mx-auto"
                   />

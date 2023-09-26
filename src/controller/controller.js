@@ -18,7 +18,6 @@ export function uploadImage(file, setFileData, setPostReady) {
     axios.post(`https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`, formData)
         .then((response) => {
             const data = response.data
-            console.log(`Cloudinary data: ${data}`)
             setFileData({
                 filename: data.original_filename,
                 format: data.format,
@@ -29,4 +28,10 @@ export function uploadImage(file, setFileData, setPostReady) {
             })
             setPostReady(true)
         })
+}
+
+export function fileSizeCheck(fileSize) {
+    const fileLimit = 1000000 //1MB
+    if (fileSize > fileLimit) return false
+    return true
 }
