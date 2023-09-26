@@ -138,8 +138,8 @@ const FeaturedCars = () => {
                 <div className="rounded overflow-hidden shadow-lg">
                   <img
                     src={
-                      'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' +
-                      car.images[0]
+                      
+                      car.image
                     }
                     alt="Car"
                     className="pb-8 mx-auto"
