@@ -1,0 +1,32 @@
+import axios from 'axios'
+
+export const serverUrl = 'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/'
+
+export function uploadImage(file, setFileData, setPostReady) {
+    if (file.length === 0) {
+        setPostReady(false)
+        return false
+    }
+
+    const cloudinaryName = ''
+    const uploadPreset = ''
+
+    const formData = new FormData()
+    formData.append("file", file[0])
+    formData.append("upload_preset", uploadPreset)
+
+    axios.post(`https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`, formData)
+        .then((response) => {
+            const data = response.data
+            console.log(`Cloudinary data: ${data}`)
+            setFileData({
+                filename: data.original_filename,
+                format: data.format,
+                width: data.width,
+                height: data.height,
+                bytes: data.bytes,
+                url: data.url
+            })
+            setPostReady(true)
+        })
+}

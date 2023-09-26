@@ -1,6 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { CarContext } from '../components/CarContextProvider'
+
+import React, { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { CarContext } from '../components/CarContextProvider';
+import { serverUrl } from '../controller/controller';
 import { ReactComponent as FilterSvg } from '../assets/revfilter.svg'
 
 const FeaturedCars = () => {
@@ -121,33 +123,28 @@ const FeaturedCars = () => {
           </button>
         </div>
       </div>
-
-      {filterApplied
-        ? filteredCars.map((car) => (
-            <Link
-              to={`/cardetails?id=${car._id}`}
-              key={car._id}
-              query={car._id}
-            >
-              <div className="my-20 text-left border-b px-4">
-                <div className="rounded overflow-hidden shadow-lg">
-                  <img
-                    src={
-                      'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/' +
-                      car.images[0]
-                    }
-                    alt="Car"
-                    className="pb-8 mx-auto"
-                  />
-                </div>
-                <div className="ml-3 mt-8">
-                  <h2 className="text-lg blue uppercase">
-                    {car.Year} {car.Make} {car.Model}
-                  </h2>
-                  <p>mileage: {car.Mileage}</p>
-                  <p className="pb-8">condition: {car.Condition}</p>
-                </div>
-                <span className="hr"></span>
+      {filterApplied ? (
+        filteredCars.map((car, index) => (
+          <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
+            <div className="my-20 text-left border-b px-4">
+              <div className="rounded overflow-hidden shadow-lg">
+              <img src={car.image} alt='Car' className="pb-8 mx-auto" />
+              </div>
+              <div className="ml-3 mt-8">
+              <h2 className="text-lg blue uppercase">{car.Year} {car.Make} {car.Model}</h2>
+              <p>mileage: {car.Mileage}</p>
+              <p className="pb-8">condition: {car.Condition}</p>
+              </div>
+              <span className="hr"></span>
+            </div>
+          </Link>
+        ))
+      ) : (
+        cars.map((car) => (
+          <Link to={`/cardetails?id=${car._id}`} key={car._id} query={car._id}>
+            <div className="my-20 text-left border-b px-4">
+            <div className="rounded overflow-hidden shadow-lg">
+              <img src={car.image} alt='Car' className="pb-8 mx-auto" />
               </div>
             </Link>
           ))
