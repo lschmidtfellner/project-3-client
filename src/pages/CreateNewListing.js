@@ -101,7 +101,7 @@ function CreateNewListing() {
             const years = response.data
               .map((car) => car.Year)
               .filter((year, index, array) => array.indexOf(year) === index)
-              .sort((a, b) => a - b);
+              .sort((a, b) => a - b)
             setYearList(years)
             // setYearId(years[0])
           }
@@ -196,9 +196,7 @@ function CreateNewListing() {
       <div className="w-full mx-auto overflow-x-hidden">
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-wrap justify-center items-center w-full yellow mb-8 py-8">
-            <h1 className="page-header">
-              Create New Listing
-            </h1>
+            <h1 className="page-header">Create New Listing</h1>
           </div>
 
           <div className="mt-2 w-full ml-3 text-left mx-auto">
@@ -224,7 +222,6 @@ function CreateNewListing() {
               onChange={(e) => {
                 setModelId(e.target.value)
               }}
-              
             >
               {['select model', ...modelList].map((model, index) => (
                 <option key={index} value={model}>
@@ -255,6 +252,7 @@ function CreateNewListing() {
                 onChange={(e) => {
                   setMileageBody(e.target.value)
                 }}
+                required
               />
               <input
                 className="block w-full blue rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-8 mileage-input"
@@ -263,6 +261,7 @@ function CreateNewListing() {
                 onChange={(e) => {
                   setPriceBody(e.target.value)
                 }}
+                required
               />
 
               <input
@@ -272,12 +271,14 @@ function CreateNewListing() {
                 onChange={(e) => {
                   setDescriptionBody(e.target.value)
                 }}
+                required
               ></input>
               <input
                 className="my-6"
                 type="file"
                 multiple
                 onChange={handleImageUpload}
+                required
               />
               {file.length > 0 &&
                 selectedImages.map((image, index) => (
