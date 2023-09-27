@@ -255,7 +255,7 @@ function CreateNewListing() {
             }}
           ></input>
           <input className="my-6"
-          type="file" multiple onChange={handleImageUpload} />
+          type="file" accept="image/*" multiple onChange={handleImageUpload} />
           {file.length > 0 && selectedImages.map((image, index) => (
             <div key={index}>
               <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
