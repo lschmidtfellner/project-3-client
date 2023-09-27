@@ -86,7 +86,7 @@ function CreateNewListing() {
         ignore = true
       }
     }
-  }, [makeId])
+  }, [makeId, modelId])
 
   useEffect(() => {
     let ignore = false
