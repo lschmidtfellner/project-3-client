@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 export const AuthContext = createContext(null)
 
 export default function AuthContextComponent({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [user, setUser] = useState({})
   const navigate = useNavigate() // Use the useNavigate hook
 
