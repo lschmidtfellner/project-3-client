@@ -4,7 +4,7 @@ import axios from 'axios';
 import { AuthContext } from '../context/AuthContextComponent';
 import Swal from 'sweetalert2';
 
-import { uploadImage, serverUrl } from '../controller/controller';
+import { uploadImage, serverUrl, fileSizeCheck } from '../controller/controller';
 
 function CreateNewListing() {
   const { user } = useContext(AuthContext);
@@ -110,15 +110,23 @@ function CreateNewListing() {
   }, [makeId, modelId]);
 
   const handleImageUpload = (e) => {
+    if (e.target.files.length === 0) return false
+    
+    const fileSize = e.target.files[0].size
+    if (!fileSizeCheck(fileSize)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'File size is too big. (Max size: 1MB)',
+      })
+      e.target.value = null
+      setFile([])
+      return false
+    }
     const uploadedImages = Array.from(e.target.files);
     setSelectedImages(uploadedImages);
     setFile(e.target.files);
-    console.log('Selected Images:', uploadedImages);
   };
-
-  useEffect(() => {
-    console.log('Selected Images:', selectedImages);
-  }, [selectedImages]);
 
   useEffect(() => {
     if (postReady && file.length > 0) handleCreateListing()
@@ -144,9 +152,6 @@ function CreateNewListing() {
     formData.append('Description', descriptionBody);
     formData.append('user', userId); // Pass the user's ObjectId value here
     formData.append('image', fileData.url)
-    // selectedImages.forEach((image, index) => {
-    //   formData.append('images', image);
-    // });
 
     console.log('New Listing FormData:', formData);
 
@@ -251,7 +256,7 @@ function CreateNewListing() {
           ></input>
           <input className="my-6"
           type="file" multiple onChange={handleImageUpload} />
-          {selectedImages.map((image, index) => (
+          {file.length > 0 && selectedImages.map((image, index) => (
             <div key={index}>
               <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
             </div>
