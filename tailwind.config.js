@@ -3,6 +3,10 @@ export const content = [
   "./src/**/*.{js,jsx,ts,tsx}",
 ];
 export const theme = {
-  extend: {},
+  extend: {
+    colors: {
+      'off-white': '#EDE9E6', // Add your custom color here
+    }
+  },
 };
 export const plugins = [];
