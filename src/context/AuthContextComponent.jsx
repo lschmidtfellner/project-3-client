@@ -38,12 +38,16 @@ export default function AuthContextComponent({ children }) {
   }
 
   const signIn = (user) => {
-    // Set the user object in the state
-    setUser(user);
-  
+    // Set the user object in the state, including email
+    setUser({
+      ...user,
+      email: user.email, // Make sure the email field is included in the user object
+    });
+
     // Store the user object in localStorage
     localStorage.setItem('user', JSON.stringify(user));
-  }
+  };
+
 
   return (
     <AuthContext.Provider
