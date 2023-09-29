@@ -117,7 +117,7 @@ function CreateNewListing() {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'File size is too big. (Max size: 1MB)',
+        text: 'File size is too big. (Max size: 1 MB)',
       })
       e.target.value = null
       setFile([])
@@ -254,8 +254,13 @@ function CreateNewListing() {
               setDescriptionBody(e.target.value);
             }}
           ></input>
-          <input className="my-6"
-          type="file" multiple onChange={handleImageUpload} />
+          
+          <div>
+            <input className="my-6 mb-1"
+            type="file" accept='image/png, image/jpeg, image/webp' onChange={handleImageUpload} />
+            <p className='text-xs'>Accepts: png, jpeg, webp. Max Size: 1 MB</p>
+          </div>
+
           {file.length > 0 && selectedImages.map((image, index) => (
             <div key={index}>
               <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
