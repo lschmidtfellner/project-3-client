@@ -123,7 +123,8 @@ function CreateNewListing() {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'File size is too big. (Max size: 1MB)'
+        text: 'File size is too big. (Max size: 1 MB)',
+
       })
       e.target.value = null
       setFile([])
@@ -198,7 +199,6 @@ function CreateNewListing() {
           <div className="flex flex-wrap justify-center items-center w-full yellow mb-8 py-8">
             <h1 className="page-header">Create New Listing</h1>
           </div>
-
           <div className="mt-2 w-full ml-3 text-left mx-auto">
             <label className="text-gray-600">make: </label>
             <select
@@ -263,33 +263,25 @@ function CreateNewListing() {
                 }}
                 required
               />
+          <input className="block w-full rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-8 mileage-input my-6 car-description"
+            type="text"
+            placeholder="description:"
+            onChange={(e) => {
+              setDescriptionBody(e.target.value);
+            }}
+          ></input>
+          
+          <div>
+            <input className="my-6 mb-1"
+            type="file" accept='image/png, image/jpeg, image/webp' onChange={handleImageUpload} />
+            <p className='text-xs'>Accepts: png, jpeg, webp. Max Size: 1 MB</p>
+          </div>
 
-              <input
-                className="block w-full rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-8 mileage-input my-6 car-description"
-                type="text"
-                placeholder="description:"
-                onChange={(e) => {
-                  setDescriptionBody(e.target.value)
-                }}
-                required
-              ></input>
-              <input
-                className="my-6"
-                type="file"
-                multiple
-                onChange={handleImageUpload}
-                required
-              />
-              {file.length > 0 &&
-                selectedImages.map((image, index) => (
-                  <div key={index}>
-                    <img
-                      src={URL.createObjectURL(image)}
-                      alt={`Image ${index}`}
-                    />
-                  </div>
-                ))}
-
+          {file.length > 0 && selectedImages.map((image, index) => (
+            <div key={index}>
+              <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
+            </div>
+          ))}
               <button
                 className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-2/5  text-white font-bold  hover:text-black mt-8 mr-8 create-btn"
                 onClick={handleCreateListing}

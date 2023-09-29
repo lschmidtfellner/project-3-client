@@ -43,6 +43,12 @@ export async function isTokenValid() {
   }
 }
 
-export async function getCarDetails() {
-  
+export async function getCarDetails(userId) {
+  try {
+    const response = await api.get(`/auth/users/${userId}/email`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while fetching user email:", error);
+    return { success: false, error: error.message };
+  }
 }

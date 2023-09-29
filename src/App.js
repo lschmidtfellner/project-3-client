@@ -6,12 +6,13 @@ import { CarContextProvider } from './components/CarContextProvider';
 import AuthContextComponent, { AuthContext } from './context/AuthContextComponent';
 import FeaturedCars from './components/FeaturedCars';
 import CreateNewListing from './pages/CreateNewListing';
-import api from './api/apiConfig';
+// import api from './api/apiConfig';
 import Nav from './components/Nav';
 import CarDetails from './components/CarDetails';
 import UserCarListings from './components/UserCarListings';
 import UserCarListingsDetails from './components/UserCarListingsDetails';
 import UpdateListing from './pages/UpdateListing';
+
 
 function App() {
   return (
@@ -43,6 +44,7 @@ const AppContent = () => {
       <Routes>
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/signin" element={<Signin />} />
+        <Route path="/auth/users/:userId/email" element={<CarDetails />} />
         <Route path="/" element={<FeaturedCars />} />
         <Route path="/post" element={isLoggedIn ? <CreateNewListing /> : <Signin />} />
         <Route path='/cardetails' element={ <CarDetails /> } />
