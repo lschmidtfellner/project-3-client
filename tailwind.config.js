@@ -5,7 +5,9 @@ export const content = [
 export const theme = {
   extend: {
     colors: {
-      'off-white': '#EDE9E6', // Add your custom color here
+      'off-white': '#EDE9E6',
+      'off-red': '#E58888',
+      'off-yellow': '#D8B44C',
     }
   },
 };
