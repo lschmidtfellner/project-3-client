@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { CarContext } from '../components/CarContextProvider'
 import { ReactComponent as FilterSvg } from '../assets/revfilter.svg'
 import { ReactComponent as DblArrow } from '../assets/revsidearrow.svg'
+import { ReactComponent as Sticker } from '../assets/revSticker.svg'
 const FeaturedCars = () => {
   const { cars } = useContext(CarContext)
   console.log('Cars from context:', cars)
@@ -57,9 +58,21 @@ const FeaturedCars = () => {
     setShowFilter((prev) => !prev)
     console.log(showFilter)
   }
+
+  const priceConversion = (price) => {
+    // If price is 7 digits or more
+    if (price >= 1000000) {
+      return (price / 1000000).toFixed(1) + 'M'; // divide by 1,000,000 and add 'M' to indicate millions
+    }
+    
+    // If price is less than 7 digits
+    return (price / 1000).toFixed(1) + 'k'; // divide by 1,000 and add 'k' to indicate thousands
+  }
+  
+
   return (
-    <div className="w-full px-5 bg-off-white pt-20 pb-1">
-      <div className="flex flex-wrap justify-between items-center w-full  mb-8 py-8">
+    <div className="w-full px-5 bg-off-white pt-20 pb-10 overflow-x-hidden">
+      <div className="flex flex-wrap justify-between items-center w-full  mb-8 pt-8">
         <h1 className="flex text-center text-3xl font-bold my-8">
           Featured Cars
         </h1>
@@ -102,7 +115,7 @@ const FeaturedCars = () => {
         }
         <div
           style={{ display: showFilter ? 'block' : 'none' }}
-          className="text-center w-full"
+          className="text-center w-full mb-10"
         >
           <button
             onClick={handleApply}
@@ -120,30 +133,36 @@ const FeaturedCars = () => {
       </div>
       {filterApplied
         ? filteredCars.map((car) => (
-          <Link
-          to={`/cardetails?id=${car._id}`}
-          key={car._id}
-          query={car._id}
-        >
-          <div className="w-full border-black border mb-16">
-            <div className="w-fit">
-              <img
-                src={car.image}
-                alt="Car"
-                className="border-b border-black w-auto"
-              />
-            </div>
-            <div className="flex justify-between items-center p-6">
-              <div className=''>
-                <h2 className=" w-auto text-xl">
-                  {car.Year} {car.Make} {car.Model}
-                </h2>
-                <p>{car.Mileage} miles</p>
+<Link
+              to={`/cardetails?id=${car._id}`}
+              key={car._id}
+              query={car._id}
+            >
+              <div className='mb-12'>
+                <div className='sticke text-center flex flex-col items-center justify-center absolute rotate-12 translate-x-[165%] -translate-y-[30%] z-0'>
+                  <h2 className='absolute font-west-avenue text-3xl'>{'$' + priceConversion(car.Price)}</h2>
+                <Sticker className='h-24 font-west-avenue text-3xl'/>
+                </div>
+                <div className="w-full border-black border">
+                  <div className="w-fit">
+                    <img
+                      src={car.image}
+                      alt="Car"
+                      className="border-b border-black w-auto"
+                    />
+                  </div>
+                  <div className="flex justify-between items-center p-6">
+                    <div className="">
+                      <h2 className=" w-auto font-west-avenue text-3xl">
+                        {car.Year} {car.Make} {car.Model}
+                      </h2>
+                      <p>{car.Mileage} miles</p>
+                    </div>
+                    <DblArrow className="ml-6 h-6" />
+                  </div>
+                </div>
               </div>
-              <DblArrow className="ml-6 h-6" />
-            </div>
-          </div>
-        </Link>
+            </Link>
           ))
         : cars.map((car) => (
             <Link
@@ -151,22 +170,28 @@ const FeaturedCars = () => {
               key={car._id}
               query={car._id}
             >
-              <div className="w-full border-black border mb-16">
-                <div className="w-fit">
-                  <img
-                    src={car.image}
-                    alt="Car"
-                    className="border-b border-black w-auto"
-                  />
+              <div className='mb-12'>
+                <div className='sticke text-center flex flex-col items-center justify-center absolute rotate-12 translate-x-[165%] -translate-y-[30%] z-0'>
+                  <h2 className='absolute font-west-avenue text-3xl'>{'$' + priceConversion(car.Price)}</h2>
+                <Sticker className='h-24 font-west-avenue text-3xl'/>
                 </div>
-                <div className="flex justify-between items-center p-6">
-                  <div className=''>
-                    <h2 className=" w-auto text-xl">
-                      {car.Year} {car.Make} {car.Model}
-                    </h2>
-                    <p>{car.Mileage} miles</p>
+                <div className="w-full border-black border">
+                  <div className="w-fit">
+                    <img
+                      src={car.image}
+                      alt="Car"
+                      className="border-b border-black w-auto"
+                    />
                   </div>
-                  <DblArrow className="ml-6 h-6" />
+                  <div className="flex justify-between items-center p-6">
+                    <div className="">
+                      <h2 className=" w-auto font-west-avenue text-3xl">
+                        {car.Year} {car.Make} {car.Model}
+                      </h2>
+                      <p>{car.Mileage} miles</p>
+                    </div>
+                    <DblArrow className="ml-6 h-6" />
+                  </div>
                 </div>
               </div>
             </Link>

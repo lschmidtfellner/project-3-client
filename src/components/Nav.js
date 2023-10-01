@@ -47,7 +47,7 @@ function Nav({ isLoggedin, setIsLoggedIn }) {
   }
 
   return (
-    <div>
+    <div className='fixed z-50'>
       <div onClick={() => menuToggle()} style={{display: isMenuOpen ? 'block' : 'none'}} className='overlay bg-[#000000] fixed opacity-50 top-0 right-0 bottom-0 left-0'>
       </div>
       <div style={{display: isMenuOpen ? 'block' : 'none'}} className='menu bg-off-white fixed top-[90px] py-10 leading-10 right-0 left-0 text-center text-2xl border-b border-black'>

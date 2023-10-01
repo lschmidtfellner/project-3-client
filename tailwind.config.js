@@ -8,6 +8,9 @@ export const theme = {
       'off-white': '#EDE9E6',
       'off-red': '#E58888',
       'off-yellow': '#D8B44C',
+    },
+    fontFamily: {
+      'west-avenue': 'west-avenue, serif'
     }
   },
 };

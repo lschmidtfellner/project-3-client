@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'west-avenue';
+  src: url('./assets/West\ Avenue.otf') format('opentype');
+}
+
 :root {
   --yellow: #ffff33;
   --blue: #079BF5;
@@ -9,6 +14,10 @@
   --pink: #FB48C4;
   --pink-bg: #FB48C4;
   
+}
+
+.sticker-red {
+  fill: #E58888
 }
 
 .page-header {
