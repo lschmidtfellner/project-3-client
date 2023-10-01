@@ -16,10 +16,6 @@
   
 }
 
-.sticker-red {
-  fill: #E58888
-}
-
 .page-header {
   @apply text-2xl font-bold
 }
@@ -35,10 +31,6 @@ body {
 html, body {
   height: 100vh;
   width: 100vw;
-}
-
-img, video {
-  height: auto;
 }
 
 p, a {
@@ -120,12 +112,4 @@ div:where(.swal2-container) h2:where(.swal2-title) {
 div:where(.swal2-container).swal2-top, div:where(.swal2-container).swal2-center, div:where(.swal2-container).swal2-bottom {
   grid-template-columns: auto minmax(0, 1fr) auto;
   padding:0px !important;
-}
-
-
-@media only screen and (min-width: 960px) {
-  img, video {
-    max-width: 25% !important;
-    height: auto;
-  }
 }
