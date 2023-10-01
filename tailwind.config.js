@@ -10,8 +10,13 @@ export const theme = {
       'off-yellow': '#D8B44C',
     },
     fontFamily: {
-      'west-avenue': 'west-avenue, serif'
-    }
+      'west-avenue': ['west-avenue, serif'],
+      'radio-grotesk': ['radio-grotesk, sans-serif']
+    },
+    fontWeight: {
+      'regular': 400,
+      'bold': 700,
+    },
   },
 };
 export const plugins = [];
