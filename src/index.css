@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'west-avenue';
+  src: url('./assets/West\ Avenue.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'radio-grotesk';
+  src: url('./assets/RadioGrotesk-Regular.otf') format('opentype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'radio-grotesk';
+  src: url('./assets/RadioGrotesk-Bold.otf') format('opentype');
+  font-weight: bold;
+}
+
 :root {
   --yellow: #ffff33;
   --blue: #079BF5;
@@ -28,25 +45,9 @@ html, body {
   width: 100vw;
 }
 
-img, video {
-  max-width: 75%;
-  height: auto;
-}
-
-p, a {
-  font-family: 'Prompt', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 ::target-text, div {
-  font-family: 'Prompt', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; 
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Ubuntu', sans-serif;
 }
 
 code {
@@ -114,10 +115,6 @@ div:where(.swal2-container).swal2-top, div:where(.swal2-container).swal2-center,
   padding:0px !important;
 }
 
-
-@media only screen and (min-width: 960px) {
-  img, video {
-    max-width: 25% !important;
-    height: auto;
-  }
+body {
+  @apply font-radio-grotesk
 }

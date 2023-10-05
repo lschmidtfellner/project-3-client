@@ -5,8 +5,18 @@ export const content = [
 export const theme = {
   extend: {
     colors: {
-      'off-white': '#EDE9E6', // Add your custom color here
-    }
+      'off-white': '#EDE9E6',
+      'off-red': '#E58888',
+      'off-yellow': '#D8B44C',
+    },
+    fontFamily: {
+      'west-avenue': ['west-avenue, serif'],
+      'radio-grotesk': ['radio-grotesk, sans-serif']
+    },
+    fontWeight: {
+      'regular': 400,
+      'bold': 700,
+    },
   },
 };
 export const plugins = [];
