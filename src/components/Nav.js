@@ -96,7 +96,7 @@ function Nav({ isLoggedin, setIsLoggedIn }) {
               />
             )}
           </div>
-            <div className='flex gap-x-8 mt-1 font-bold'>
+            <div className='hidden md:flex gap-x-8 mt-1 font-bold'>
               <h2 onClick={() => navNoToggle('/')}>Home</h2>
               <h2 onClick={() => navNoToggle('/usercarlistings')}>
                 Your Listings
