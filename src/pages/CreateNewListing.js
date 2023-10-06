@@ -38,7 +38,7 @@ function CreateNewListing() {
     let ignore = false
     axios
       .get(
-        'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo'
+        `${serverUrl}api/carinfo`
       )
       .then((response) => {
         if (!ignore) {
@@ -64,7 +64,7 @@ function CreateNewListing() {
     if (makeId !== '') {
       axios
         .get(
-          `https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo/search?Make=${makeId}`
+          `${serverUrl}api/carinfo/search?Make=${makeId}`
         )
         .then((response) => {
           if (!ignore) {
@@ -93,7 +93,7 @@ function CreateNewListing() {
     if (modelId !== '') {
       axios
         .get(
-          `https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/api/carinfo/search?Make=${makeId}&Model=${modelId}`
+          `${serverUrl}api/carinfo/search?Make=${makeId}&Model=${modelId}`
         )
         .then((response) => {
           if (!ignore) {

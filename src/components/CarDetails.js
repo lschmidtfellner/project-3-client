@@ -83,7 +83,7 @@ const CarDetails = () => {
   }
 
   return (
-    <div className='w-100 h-full bg-off-white'>
+    <div className='w-100 h-screen bg-off-white'>
       <CarDetailsInfo selectedCar={selectedCar}/>
     </div>
   );
