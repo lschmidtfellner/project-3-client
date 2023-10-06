@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const serverUrl = 'http://127.0.0.1:8000/'//'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/'
+export const serverUrl = 'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/'
 
 export function uploadImage(file, setFileData, setPostReady) {
     if (file.length === 0) {
@@ -34,4 +34,13 @@ export function fileSizeCheck(fileSize) {
     const fileLimit = 1000000 //1MB
     if (fileSize > fileLimit) return false
     return true
+}
+
+export async function getCarsFromSalePost(setCars) {
+    try{
+        const cars =  await axios.get(`${serverUrl}api/saleposts`)
+        setCars(cars.data)
+    } catch (error) {
+        console.log(error)
+    }
 }

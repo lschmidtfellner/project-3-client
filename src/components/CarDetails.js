@@ -1,16 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { CarContext } from '../components/CarContextProvider';
 import { AuthContext } from '../context/AuthContextComponent'; // Import AuthContext
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import api from '../api/apiConfig'; // Import api object
 import CarDetailsInfo from './CarDetailsInfo';
+import { getCarsFromSalePost } from '../controller/controller';
 
 const CarDetails = () => {
-  const { cars } = useContext(CarContext);
-  const { user } = useContext(AuthContext);
-  console.log(user)
+  let { user } = useContext(AuthContext);
+  if (JSON.stringify(user) === '{}') user = JSON.parse(localStorage.getItem('user'));
+
+  const [cars, setCars] = useState([])
   const [selectedCar, setSelectedCar] = useState(null);
   const [sellerEmailAddress, setSellerEmailAddress] = useState(null); // Store the seller's email
   const navigate = useNavigate();
@@ -20,7 +21,11 @@ const CarDetails = () => {
   const selectedCarId = queryParams.get('id');
 
   useEffect(() => {
-    if (selectedCarId) {
+    getCarsFromSalePost(setCars)
+  }, [])
+
+  useEffect(() => {
+    if (selectedCarId && cars.length > 0) {
       const car = cars.find((car) => car._id === selectedCarId);
       setSelectedCar(car);
 
