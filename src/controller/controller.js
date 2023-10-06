@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const serverUrl = 'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/'
+export const serverUrl = 'http://127.0.0.1:8000/'//'https://luke-used-cars-backend-19ea42e37e12.herokuapp.com/'
 
 export function uploadImage(file, setFileData, setPostReady) {
     if (file.length === 0) {
