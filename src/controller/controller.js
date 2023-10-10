@@ -35,3 +35,12 @@ export function fileSizeCheck(fileSize) {
     if (fileSize > fileLimit) return false
     return true
 }
+
+export async function getCarsFromSalePost(setCars) {
+    try{
+        const cars =  await axios.get(`${serverUrl}api/saleposts`)
+        setCars(cars.data)
+    } catch (error) {
+        console.log(error)
+    }
+}

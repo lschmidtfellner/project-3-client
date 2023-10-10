@@ -4,6 +4,7 @@ import { CarContext } from '../components/CarContextProvider'
 import { ReactComponent as FilterSvg } from '../assets/revfilter.svg'
 import { ReactComponent as DblArrow } from '../assets/revsidearrow.svg'
 import { ReactComponent as Sticker } from '../assets/revSticker.svg'
+
 const FeaturedCars = () => {
   const { cars } = useContext(CarContext)
   console.log('Cars from context:', cars)
