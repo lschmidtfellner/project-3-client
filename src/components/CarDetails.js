@@ -8,6 +8,17 @@ import CarDetailsInfo from './CarDetailsInfo';
 import { getCarsFromSalePost } from '../controller/controller';
 
 
+const formatPrice = (price) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(price);
+};
+
+
+
 const CarDetails = () => {
   let { user } = useContext(AuthContext);
   // if (JSON.stringify(user) === '{}') user = JSON.parse(localStorage.getItem('user'));
