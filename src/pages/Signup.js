@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { signup } from '../api/auth';
 import Modal from 'react-modal';
 import LottieAnimation from '../components/LottieAnimation';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
-Modal.setAppElement('#root')
+Modal.setAppElement('#root');
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -17,20 +17,31 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    
+    // Check if all fields are filled
+    if (!username || !email || !password) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'All fields are required!',
+      });
+      return; // Exit the function early if not all fields are filled
+    }
+
     try {
       const response = await signup(username, email, password);
       if (response.status === 200) {
         setSignupSuccess(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+        Swal.fire({
+          icon: 'success',
+          title: 'Successfully signed up!'
+        }).then(() => {
+          navigate('/auth/signin');
+        });
       }
-      setTimeout(() => {
-        window.location.reload()
-    }, 2000)
-    Swal.fire({
-        icon: 'success',
-        title: "You have successfully deleted this posting!"
-    }).then(() => {
-      navigate('/auth/signin');
-    });
     } catch (error) {
       console.log("Error during signup:", error);
     }

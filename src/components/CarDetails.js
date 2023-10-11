@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import api from '../api/apiConfig'; // Import api object
 import ContactSellerBtn from './ContactSellerBtn';
+import CarDetailsInfo from './CarDetailsInfo';
+import { getCarsFromSalePost } from '../controller/controller';
 
 const formatPrice = (price) => {
   return new Intl.NumberFormat('en-US', {
@@ -14,8 +16,7 @@ const formatPrice = (price) => {
     maximumFractionDigits: 0
   }).format(price);
 };
-import CarDetailsInfo from './CarDetailsInfo';
-import { getCarsFromSalePost } from '../controller/controller';
+
 
 const CarDetails = () => {
   let { user } = useContext(AuthContext);
