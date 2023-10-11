@@ -1,6 +1,14 @@
 import React from 'react'
 
 export default function CarDetailsInfo( {selectedCar} ) {
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(price);
+      };
     return (
         <div className='bg-off-white w-full pt-36'>
             <div className='border border-black mx-5'>
@@ -19,7 +27,7 @@ export default function CarDetailsInfo( {selectedCar} ) {
                 </div>
 
                 <div className='font-bold text-2xl pl-8 py-5'>
-                    <p>{`$${selectedCar.Price}`}</p>
+                    <p>{`${formatPrice(selectedCar.Price)}`}</p>
                 </div>
 
             </div>
