@@ -153,7 +153,7 @@ const FeaturedCars = () => {
                       <img
                         src={car.image}
                         alt="Car"
-                        className="border-b border-black w-auto"
+                        className="w-full h-full object-cover border-b border-black"
                       />
                     </div>
                     <div className="flex justify-between items-center p-6">
@@ -187,7 +187,7 @@ const FeaturedCars = () => {
                       <img
                         src={car.image}
                         alt="Car"
-                        className="border-b border-black"
+                        className="w-full h-full object-cover border-b border-black"
                       />
                     </div>
                     <div className="lg:h-32 flex justify-between items-center p-6">

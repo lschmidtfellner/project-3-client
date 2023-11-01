@@ -5,6 +5,8 @@ import { AuthContext } from '../context/AuthContextComponent';
 import { CarContext } from '../components/CarContextProvider';
 import Swal from 'sweetalert2';
 import { serverUrl } from '../controller/controller';
+import { ReactComponent as Sticker } from '../assets/revSticker.svg'
+import { ReactComponent as DblArrow } from '../assets/revsidearrow.svg'
 
 const UserCarListings = () => {
   const { user } = useContext(AuthContext);
@@ -58,25 +60,43 @@ const UserCarListings = () => {
       .catch(error => console.error('Error updating car price:', error));
   };
 
-  return (
-    <div className="w-full mx-auto text-center">
-      <div className="flex flex-wrap justify-center items-center w-full yellow mb-8 py-8">
-        <h1 className="text-center text-3xl blue font-bold my-8">Your Listings</h1>
-      </div>
+  const priceConversion = (price) => {
+    // If price is 7 digits or more
+    if (price >= 1000000) {
+      return (price / 1000000).toFixed(1) + 'M' // divide by 1,000,000 and add 'M' to indicate millions
+    }
 
+    // If price is less than 7 digits
+    return (price / 1000).toFixed(1) + 'k' // divide by 1,000 and add 'k' to indicate thousands
+  }
+
+  return (
+    <div className='flex flex-col items-center min-h-screen pt-36 px-5 sm:px-24 md:px-52 xl:px-72 bg-off-white pb-10 overflow-x-hidden'>
+      <h1 className='text-3xl font-bold mt-10 mb-20'>Your Listings</h1>
+    <div className="grid lg:grid-cols-2 gap-x-12 items-stretch">
       {userCars.length > 0 ? (
         userCars.map((car, index) => (
-          <div key={car._id}> 
+          <div className='flex flex-col mb-12 relative xl:w-[1/2] ' key={car._id}> 
             <Link to={`/usercarlistingsdetails?id=${car._id}`}>
-              <div className="mt-20 text-left border-b px-4">
-                <div className="rounded overflow-hidden shadow-lg">
-                  <img src={userCarListings[index]?.image} alt='Car' className="pb-8 mx-auto" />
+            <div className="sticker text-center flex flex-col items-center justify-center absolute transform rotate-12 -top-8 -right-4">
+                    <h2 className="absolute font-west-avenue text-3xl">
+                      {'$' + priceConversion(car.Price)}
+                    </h2>
+                    <Sticker className="h-24 font-west-avenue text-3xl" />
+                  </div>
+              <div className="w-full border-black border border-b-0">
+                <div className="border-b border-black">
+                  <img src={userCarListings[index]?.image} alt='Car' className="w-full h-full object-cover" />
                 </div>
-                <div className="ml-3 mt-8">
-                  <h2 className="text-lg blue uppercase">{car.Year} {car.Make} {car.Model}</h2>
-                  <p>mileage: {car.Mileage}</p>
-                  <p className="pb-8">condition: {car.Condition}</p>
-                </div>
+                <div className="flex justify-between items-center p-6">
+                      <div className="">
+                        <h2 className=" w-auto font-west-avenue text-3xl">
+                          {car.Year} {car.Make} {car.Model}
+                        </h2>
+                        <p>{car.Mileage} miles</p>
+                      </div>
+                      <DblArrow className="ml-6 h-6" />
+                    </div>
               </div>
             </Link>
             <div className="text-center w-full">
@@ -85,38 +105,41 @@ const UserCarListings = () => {
                   setEditingCarId(car._id); 
                   setShowPriceModal(true); 
                 }} 
-                className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3  text-white font-bold  hover:text-black mt-8 mr-8"
+                className="w-[50%] border bg-off-yellow border-black p-2 font-bold"
               >
                 edit price
               </button>
-              <button onClick={() => handleDelete(car._id)} className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3  text-white font-bold  hover:text-black mt-8 mr-8">delete</button>
+              <button onClick={() => handleDelete(car._id)} className="w-[50%] border border-l-0 bg-off-red border-black p-2 font-bold">delete</button>
             </div>
           </div>
         ))
       ) : (
         <div>
-          <p className="text-base blue">You have not posted any cars.</p>
+          <p className="font-bold">You have not posted any cars.</p>
         </div>
       )}
 
       {showPriceModal && (
-        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50 bg-black">
-          <div className="bg-white p-4 rounded">
-            <h2 className="mb-4">Edit Price</h2>
-            <input 
+        <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-opacity-50 bg-black">
+          <div className="flex flex-col items-center w-[80%] lg:w-1/2 min-h-[30%] lg:h-1/2 bg-off-white p-4">
+            <h2 className="text-3xl font-bold mt-20 mb-12">Edit Price</h2>
+            <input className='w-64 md:w-80 p-2 border border-black border-b-0 bg-off-white'
               type="number" 
               value={newPrice} 
               onChange={e => setNewPrice(e.target.value)} 
               placeholder="Enter new price"
             />
-            <button onClick={handlePriceChange}>Confirm</button>
-            <button onClick={() => setShowPriceModal(false)}>Cancel</button>
+            <div className='mb-12'>
+            <button className='w-32 md:w-40 border bg-off-yellow border-black p-2 font-bold' onClick={handlePriceChange}>Confirm</button>
+            <button className='w-32 md:w-40 border border-l-0 bg-off-red border-black p-2 font-bold' onClick={() => setShowPriceModal(false)}>Cancel</button>
+            </div>
           </div>
         </div>
       )}
 
-      <Link className="mt-8 w-full" to="/post">
-        <button className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-2/5 text-white font-bold  hover:text-black mt-14 mb-14 mr-8 ">create listing</button>
+    </div>
+      <Link className="mt-8 flex justify-center items-center w-full" to="/post">
+        <button className="mt-8 mb-12 w-48 lg:w-60 border bg-off-red border-black p-2 font-bold">create listing</button>
       </Link>
     </div>
   );

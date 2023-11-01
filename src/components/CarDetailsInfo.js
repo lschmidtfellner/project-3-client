@@ -10,8 +10,8 @@ export default function CarDetailsInfo( {selectedCar} ) {
         }).format(price);
       };
     return (
-        <div className='bg-off-white w-full pt-36'>
-            <div className='border border-black mx-5'>
+        <div className=''>
+            <div className='border border-black'>
 
                 <div className='border-b border-black flex justify-center'>
                     <img src={selectedCar.image} alt='Car' />

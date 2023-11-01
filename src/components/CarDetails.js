@@ -48,7 +48,7 @@ const CarDetails = () => {
   }
 
   return (
-    <div className='w-100 h-screen bg-off-white'>
+    <div className='flex flex-col min-h-screen px-5 sm:px-24 md:px-52 xl:px-72 bg-off-white pt-32 pb-10 overflow-x-hidden items-center w-full'>
       <CarDetailsInfo selectedCar={selectedCar}/>
       <ContactSellerBtn 
             userId={selectedCar.user}
