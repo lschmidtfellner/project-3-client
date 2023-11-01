@@ -71,7 +71,7 @@ const UserCarListings = () => {
   }
 
   return (
-    <div className='flex flex-col items-center min-h-screen pt-36 px-5 sm:px-24 md:px-52 xl:px-72 bg-off-white pb-10 overflow-x-hidden'>
+    <div className='flex flex-col items-center min-h-screen pt-28 px-5 sm:px-24 md:px-52 xl:px-72 bg-off-white pb-10 overflow-x-hidden'>
       <h1 className='text-3xl font-bold mt-10 mb-20'>Your Listings</h1>
     <div className="grid lg:grid-cols-2 gap-x-12 items-stretch">
       {userCars.length > 0 ? (

@@ -194,9 +194,9 @@ function CreateNewListing() {
 
   return (
     <div className='bg-off-white'>
-      <div className="w-[90%] sm:w-[60%] md:w-[50%] lg:w-[40%] xl:w-[30%] 2xl:w-[25%] mx-auto overflow-x-hidden">
+      <div className="w-[90%] sm:w-[60%] md:w-[50%] lg:w-[40%] xl:w-[30%] 2xl:w-[25%] mx-auto overflow-x-hidden pt-32">
         <div className="flex flex-col items-center justify-center">
-            <h1 className="text-3xl font-bold mt-32 mb-12">Create New Listing</h1>
+            <h1 className="text-3xl font-bold mt-10 mb-20">Create New Listing</h1>
           <div className="w-full text-left mx-auto">
             <select
               className="w-full p-3 border border-black mb-6 bg-off-white"

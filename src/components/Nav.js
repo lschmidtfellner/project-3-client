@@ -86,26 +86,26 @@ function Nav({ isLoggedin, setIsLoggedIn }) {
           <div className="w-8 flex items-end justify-end md:hidden">
             {isMenuOpen ? (
               <CloseX
-                className="h-6 align-right"
+                className="h-6 align-right cursor-pointer"
                 onClick={() => menuToggle()}
               />
             ) : (
               <Hamburger
-                className="h-6 align-right"
+                className="h-6 align-right cursor-pointer"
                 onClick={() => menuToggle()}
               />
             )}
           </div>
             <div className='hidden md:flex gap-x-8 mt-1 font-bold'>
-              <h2 onClick={() => navNoToggle('/')}>Home</h2>
-              <h2 onClick={() => navNoToggle('/usercarlistings')}>
+              <h2 className='cursor-pointer' onClick={() => navNoToggle('/')}>Home</h2>
+              <h2 className='cursor-pointer' onClick={() => navNoToggle('/usercarlistings')}>
                 Your Listings
               </h2>
-              <h2 onClick={() => navNoToggle('/post')}>Create Listing</h2>
+              <h2 className='cursor-pointer' onClick={() => navNoToggle('/post')}>Create Listing</h2>
               {loggedIn ? (
-                <h2 onClick={() => handleSignout()}>Sign Out</h2>
+                <h2 className='cursor-pointer' onClick={() => handleSignout()}>Sign Out</h2>
               ) : (
-                <h2 onClick={() => navNoToggle('/auth/signin')}>Sign In</h2>
+                <h2 className='cursor-pointer' onClick={() => navNoToggle('/auth/signin')}>Sign In</h2>
               )}
             </div>
         </div>

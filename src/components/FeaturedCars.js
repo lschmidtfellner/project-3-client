@@ -77,7 +77,7 @@ const FeaturedCars = () => {
           <h1 className="flex text-center text-3xl font-bold my-8">
             Featured Cars
           </h1>
-          <FilterSvg className="w-6" onClick={() => toggleFilter()} />
+          <FilterSvg className="w-6 cursor-pointer" onClick={() => toggleFilter()} />
           <div
             style={{ display: showFilter ? 'block' : 'none' }}
             className="mt-2 w-full"
