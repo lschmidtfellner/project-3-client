@@ -193,106 +193,100 @@ function CreateNewListing() {
   }
 
   return (
-    <>
-      <div className="w-full mx-auto overflow-x-hidden">
+    <div className='bg-off-white'>
+      <div className="w-[90%] sm:w-[60%] md:w-[50%] lg:w-[40%] xl:w-[30%] 2xl:w-[25%] mx-auto overflow-x-hidden">
         <div className="flex flex-col items-center justify-center">
-          <div className="flex flex-wrap justify-center items-center w-full yellow mb-8 py-8">
-            <h1 className="page-header">Create New Listing</h1>
-          </div>
-          <div className="mt-2 w-full ml-3 text-left mx-auto">
-            <label className="text-gray-600">make: </label>
+            <h1 className="text-3xl font-bold mt-32 mb-12">Create New Listing</h1>
+          <div className="w-full text-left mx-auto">
             <select
-              className="blue rounded-full ml-2 mb-8 text-base"
+              className="w-full p-3 border border-black mb-6 bg-off-white"
               value={makeId}
               onChange={(e) => {
                 setMakeId(e.target.value)
               }}
             >
-              {['select make', ...makeList].map((make, index) => (
+              {['Select make', ...makeList].map((make, index) => (
                 <option key={index} value={make}>
                   {make}
                 </option>
               ))}
             </select>
-            <br></br>
-            <label className="text-gray-600">model: </label>
             <select
-              className="blue rounded-full mb-8"
+              className="w-full p-3 border border-black mb-6 bg-off-white"
               value={modelId}
               onChange={(e) => {
                 setModelId(e.target.value)
               }}
             >
-              {['select model', ...modelList].map((model, index) => (
+              {['Select model', ...modelList].map((model, index) => (
                 <option key={index} value={model}>
                   {model}
                 </option>
               ))}
             </select>
-            <br></br>
-            <label className="text-gray-600">year: </label>
             <select
-              className="ml-3 blue rounded-full mb-8"
+              className="w-full p-3 border border-black mb-6 bg-off-white"
               value={yearId}
               onChange={(e) => {
                 setYearId(e.target.value)
               }}
             >
-              {['select year', ...yearList].map((year, index) => (
+              {['Select year', ...yearList].map((year, index) => (
                 <option key={index} value={year}>
                   {year}
                 </option>
               ))}
             </select>
-            <div className="lg:w-2/5 md:w-2/5 w-4/5 mx-auto">
               <input
-                className="block w-full blue rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-8 mileage-input"
+                className="w-full p-3 border border-black mb-6 bg-off-white placeholder-black"
                 type="text"
-                placeholder="mileage:"
+                placeholder="Enter mileage"
                 onChange={(e) => {
                   setMileageBody(e.target.value)
                 }}
                 required
               />
               <input
-                className="block w-full blue rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-8 mileage-input"
+                className="w-full p-3 border border-black mb-6 bg-off-white placeholder-black"
                 type="number"
-                placeholder="price:"
+                placeholder="Enter price"
                 onChange={(e) => {
                   setPriceBody(e.target.value)
                 }}
                 required
               />
-          <input className="block w-full rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-8 mileage-input my-6 car-description"
-            type="text"
-            placeholder="description:"
-            onChange={(e) => {
-              setDescriptionBody(e.target.value);
-            }}
-          ></input>
+          <textarea
+  className="w-full min-h-48 p-3 border border-black mb-6 bg-off-white placeholder-black"
+  placeholder="Enter description"
+  onChange={(e) => {
+    setDescriptionBody(e.target.value);
+  }}
+></textarea>
+
           
-          <div>
+          <div className='flex flex-col justify-center items-center mb-12'>
             <input className="my-6 mb-1"
             type="file" accept='image/png, image/jpeg, image/webp' onChange={handleImageUpload} />
-            <p className='text-xs'>Accepts: png, jpeg, webp. Max Size: 1 MB</p>
+            <p className='text-sm'>Accepts: png, jpeg, webp. Max Size: 1 MB</p>
           </div>
 
           {file.length > 0 && selectedImages.map((image, index) => (
             <div key={index}>
-              <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
+              <img className='w-full h-full object-cover border border-black' src={URL.createObjectURL(image)} alt={`Image ${index}`} />
             </div>
           ))}
+          <div className='w-full flex justify-center'>
               <button
-                className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-2/5  text-white font-bold  hover:text-black mt-8 mr-8 create-btn"
+                className="mt-12 w-48 lg:w-60 border bg-off-red border-black p-2 font-bold mb-20"
                 onClick={handleCreateListing}
               >
                 create listing
               </button>
-            </div>
+              </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
