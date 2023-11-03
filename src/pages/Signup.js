@@ -52,39 +52,38 @@ export default function Signup() {
   }
 
   return (
-    <div className="flex flex-1 flex-col justify-center px-6 lg:px-8 h-max">
-      <div className="lg:w-1/3 md:w-1/3 w-full mx-auto bg-white">
-        <LottieAnimation />
+    <div className="bg-off-white min-h-[100vh]">
+      <div className="flex flex-col items-center justify-center w-[90%]  mx-auto overflow-x-hidden pt-32 sm:pt-48">
       </div>
-      <form onSubmit={handleSubmit} className="placeholder:">
-        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-indigo-600 mt-16 mb-10">
+      <form onSubmit={handleSubmit} className="mx-auto flex flex-col justify-center items-center w-72">
+        <h2 className="text-center text-2xl leading-9 tracking-tight mt-16 mb-10">
           Create an account
         </h2>
-        <div className="lg:w-2/5 md:w-2/5 w-full mx-auto">
-          <input className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        <div className="w-full mx-auto">
+          <input className="w-full p-3 border border-black mb-6 bg-off-white placeholder-black"
             type="username"
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="username"
           />
-          <input className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-8"
+          <input className="w-full p-3 border border-black mb-6 bg-off-white placeholder-black"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email"
           />
-          <input className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-8"
+          <input className="w-full p-3 border border-black bg-off-white placeholder-black"
             type="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <div className="mb-8">
-            <button type="submit" className="rounded-full pink-bg w- lg:w-1/6 md:w-1/6 py-2 w-1/3  text-white font-bold  hover:text-black mt-4">Signup</button>{' '}
+          <div className="mb-8 flex flex-col jusify-center items-center">
+            <button type="submit" className="mt-12 w-48 lg:w-60 border bg-off-red border-black p-2 font-bold">Signup</button>{' '}
             {!signupSuccess && (
-              <span className="ml-2 mt-4 lg:w-1/6 md:w-1/6">
+              <span className="mt-8">
                 {"Already a user? "}
                 <Link to="/auth/signin" className="text-indigo-600 hover:text-black">Signin</Link>
                 {/* {" instead."} */}
