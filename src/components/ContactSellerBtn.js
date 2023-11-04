@@ -69,7 +69,7 @@ const ContactSellerBtn = ({ userId, selectedCar }) => {
     };
 
     return (
-        <button onClick={generateEmailAddress} className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3 text-white font-bold hover:text-black mt-4">
+        <button onClick={generateEmailAddress} className="mt-8 w-48 lg:w-60 border bg-off-red border-black p-2 font-bold">
             Contact Seller
         </button>
     );

@@ -77,7 +77,7 @@ const FeaturedCars = () => {
           <h1 className="flex text-center text-3xl font-bold my-8">
             Featured Cars
           </h1>
-          <FilterSvg className="w-6" onClick={() => toggleFilter()} />
+          <FilterSvg className="w-6 cursor-pointer" onClick={() => toggleFilter()} />
           <div
             style={{ display: showFilter ? 'block' : 'none' }}
             className="mt-2 w-full"
@@ -153,7 +153,7 @@ const FeaturedCars = () => {
                       <img
                         src={car.image}
                         alt="Car"
-                        className="border-b border-black w-auto"
+                        className="w-full h-full object-cover border-b border-black"
                       />
                     </div>
                     <div className="flex justify-between items-center p-6">
@@ -187,7 +187,7 @@ const FeaturedCars = () => {
                       <img
                         src={car.image}
                         alt="Car"
-                        className="border-b border-black"
+                        className="w-full h-full object-cover border-b border-black"
                       />
                     </div>
                     <div className="lg:h-32 flex justify-between items-center p-6">

@@ -48,13 +48,15 @@ const CarDetails = () => {
   }
 
   return (
-    <div className='w-100 h-screen bg-off-white'>
+    <div className='flex flex-col min-h-screen px-5 bg-off-white pt-32 pb-10 overflow-x-hidden items-center w-full'>
+      <div className='flex flex-col items-center w-full sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[40%]'>
       <CarDetailsInfo selectedCar={selectedCar}/>
       <ContactSellerBtn 
             userId={selectedCar.user}
             selectedCar={selectedCar}
             >Contact Seller
       </ContactSellerBtn>
+      </div>
     </div>
   );
 };
