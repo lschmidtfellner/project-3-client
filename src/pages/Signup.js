@@ -85,7 +85,7 @@ export default function Signup() {
             {!signupSuccess && (
               <span className="mt-8">
                 {"Already a user? "}
-                <Link to="/auth/signin" className="text-indigo-600 hover:text-black">Signin</Link>
+                <Link to="/auth/signin" className="text-indigo-600 hover:text-black">Sign In</Link>
                 {/* {" instead."} */}
               </span>
             )}

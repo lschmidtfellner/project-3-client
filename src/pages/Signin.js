@@ -55,7 +55,7 @@ export default function Signin() {
     <div className="bg-off-white min-h-[100vh]">
       <div className="flex flex-col items-center justify-center w-[90%] sm:w-[60%] md:w-[50%] lg:w-[40%] xl:w-[30%] 2xl:w-[25%] mx-auto overflow-x-hidden pt-32 sm:pt-48">
       </div>
-      <form className=' justify-center items-center' onSubmit={handleSubmit}>
+      <form className='flex flex-col mx-auto justify-center items-center' onSubmit={handleSubmit}>
         <h2 className="text-center text-2xl leading-9 tracking-tight mt-16 mb-10">
           Sign in to your account
         </h2>
