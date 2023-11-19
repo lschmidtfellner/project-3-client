@@ -4,7 +4,7 @@ import { CarContext } from '../components/CarContextProvider'
 import { ReactComponent as FilterSvg } from '../assets/revfilter.svg'
 import { ReactComponent as DblArrow } from '../assets/revsidearrow.svg'
 import { ReactComponent as Sticker } from '../assets/revSticker.svg'
-import { addComma } from '../controller/controller'
+import { addComma, alphabeticalOrder } from '../controller/controller'
 
 const FeaturedCars = () => {
   const { cars } = useContext(CarContext)
@@ -17,7 +17,8 @@ const FeaturedCars = () => {
   const [filterApplied, setFilterApplied] = useState(false)
   const [showFilter, setShowFilter] = useState(false)
   useEffect(() => {
-    const uniqueMakes = [...new Set(cars.map((car) => car.Make))]
+    let uniqueMakes = [...new Set(cars.map((car) => car.Make))]
+    uniqueMakes = alphabeticalOrder(uniqueMakes)
     setMakes(uniqueMakes)
     console.log('Unique makes:', uniqueMakes)
   }, [cars])

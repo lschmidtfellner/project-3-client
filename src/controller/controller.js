@@ -66,3 +66,7 @@ export function addComma(number) {
 
     return `${reversed.reverse().join("")}${decimalString}`
 }
+
+export function alphabeticalOrder(arr) {
+    return arr.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+}
