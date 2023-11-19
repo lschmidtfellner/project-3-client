@@ -1,4 +1,5 @@
 import React from 'react'
+import { addComa } from '../controller/controller';
 
 export default function CarDetailsInfo( {selectedCar} ) {
     const formatPrice = (price) => {
@@ -19,7 +20,7 @@ export default function CarDetailsInfo( {selectedCar} ) {
 
                 <div className='border-b border-black pl-8 py-5'>
                     <p className='font-west-avenue text-3xl'>{`${selectedCar.Year} ${selectedCar.Make} ${selectedCar.Model}`}</p>
-                    <p>{`${selectedCar.Mileage} miles`}</p>
+                    <p>{`${addComa(selectedCar.Mileage)} miles`}</p>
                 </div>
 
                 <div className='border-b border-black pl-8 py-5'>

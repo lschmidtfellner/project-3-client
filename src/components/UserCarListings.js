@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContextComponent';
 import { CarContext } from '../components/CarContextProvider';
 import Swal from 'sweetalert2';
-import { serverUrl } from '../controller/controller';
+import { addComa, serverUrl } from '../controller/controller';
 import { ReactComponent as Sticker } from '../assets/revSticker.svg'
 import { ReactComponent as DblArrow } from '../assets/revsidearrow.svg'
 
@@ -93,7 +93,7 @@ const UserCarListings = () => {
                         <h2 className=" w-auto font-west-avenue text-3xl">
                           {car.Year} {car.Make} {car.Model}
                         </h2>
-                        <p>{car.Mileage} miles</p>
+                        <p>{addComa(car.Mileage)} miles</p>
                       </div>
                       <DblArrow className="ml-6 h-6" />
                     </div>
