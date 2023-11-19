@@ -45,7 +45,7 @@ export async function getCarsFromSalePost(setCars) {
     }
 }
 
-export function addComa(number) {
+export function addComma(number) {
     const decimalSplit = `${number}`.split(".")
 
     const numberString = decimalSplit[0]
@@ -55,13 +55,13 @@ export function addComa(number) {
     if (numberString.length <= 3) return `${numberString}${decimalString}`
 
     const reversed = numberString.split("").reverse()
-    let coma = 0
+    let comma = 0
     for (let i = 0; i < reversed.length; i++) {
-        if (coma === 3) {
+        if (comma === 3) {
             reversed[i] = `${reversed[i]},`
-            coma = 0
+            comma = 0
         }
-        coma++
+        comma++
     }
 
     return `${reversed.reverse().join("")}${decimalString}`
