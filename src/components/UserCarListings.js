@@ -15,13 +15,17 @@ const UserCarListings = () => {
   const userCars = cars.filter((car) => car.user === user._id);
   const [userCarListings, setUserCarListing] = useState([]);
 
+  useEffect(() => { 
+    setUserCarListing(cars.filter((car) => car.user === user._id));
+  }, [cars, user._id]);
+
   useEffect(() => {
     axios.get(`${serverUrl}api/saleposts/`)
       .then((response) => {
         const userCars = response.data.filter((car) => car.user === user._id);
         setUserCarListing(userCars);
       });
-  }, []);
+  }, [user._id]);
 
   const handleDelete = (id) => {
     axios.delete(`${serverUrl}api/saleposts/${id}`)
@@ -42,14 +46,16 @@ const UserCarListings = () => {
   const [newPrice, setNewPrice] = useState('');
 
   const handlePriceChange = () => {
-    axios.put(`${serverUrl}api/saleposts/${editingCarId}`, { price: newPrice })
+    axios.put(`${serverUrl}api/saleposts/${editingCarId}`, { Price: newPrice })
       .then(() => {
         const updatedCars = cars.map(car => {
+          console.log('Before Update', cars);
           if (car._id === editingCarId) {
             return { ...car, price: newPrice };
           }
           return car;
         });
+        console.log('After update', updatedCars)
         setCars(updatedCars);
         setShowPriceModal(false);
         Swal.fire({
