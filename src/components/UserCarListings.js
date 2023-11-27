@@ -46,7 +46,10 @@ const UserCarListings = () => {
   const [newPrice, setNewPrice] = useState('');
 
   const handlePriceChange = () => {
-    axios.put(`${serverUrl}api/saleposts/${editingCarId}`, { Price: newPrice })
+
+    const priceValue = parseFloat(newPrice.replace(/[^0-9.]/g, '').trim());
+    if(!isNaN(priceValue)) {
+    axios.put(`${serverUrl}api/saleposts/${editingCarId}`, { Price: priceValue })
       .then(() => {
         const updatedCars = cars.map(car => {
           console.log('Before Update', cars);
@@ -60,11 +63,15 @@ const UserCarListings = () => {
         setShowPriceModal(false);
         Swal.fire({
           icon: 'success',
-          title: "Price updated successfully!"
+          title: "Price updated successfully!",
+          text: 'Please enter a valid number for the price'
         });
       })
       .catch(error => console.error('Error updating car price:', error));
-  };
+  } else {
+    console.error('invalid price input');
+  }
+};
 
   const priceConversion = (price) => {
     // If price is 7 digits or more
@@ -129,12 +136,14 @@ const UserCarListings = () => {
         <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-opacity-50 bg-black">
           <div className="flex flex-col items-center w-[80%] lg:w-1/2 min-h-[30%] lg:h-1/2 bg-off-white p-4">
             <h2 className="text-3xl font-bold mt-20 mb-12">Edit Price</h2>
+           
             <input className='w-64 md:w-80 p-2 border border-black border-b-0 bg-off-white'
               type="text" 
               value={newPrice} 
-              onChange={e => setNewPrice(e.target.value)} 
-              placeholder="$0.00"
+              onChange={e => setNewPrice(e.target.value.replace(/[^0-9.]/g, ''))}
+              placeholder="$0"
             />
+       
             <div className='mb-12'>
             <button className='w-32 md:w-40 border bg-off-yellow border-black p-2 font-bold' onClick={handlePriceChange}>Confirm</button>
             <button className='w-32 md:w-40 border border-l-0 bg-off-red border-black p-2 font-bold' onClick={() => setShowPriceModal(false)}>Cancel</button>
