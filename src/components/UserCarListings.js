@@ -51,7 +51,7 @@ const UserCarListings = () => {
         const updatedCars = cars.map(car => {
           console.log('Before Update', cars);
           if (car._id === editingCarId) {
-            return { ...car, price: newPrice };
+            return { ...car, Price: newPrice };
           }
           return car;
         });
