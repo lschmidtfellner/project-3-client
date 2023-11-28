@@ -4,6 +4,7 @@ import { CarContext } from '../components/CarContextProvider'
 import { ReactComponent as FilterSvg } from '../assets/revfilter.svg'
 import { ReactComponent as DblArrow } from '../assets/revsidearrow.svg'
 import { ReactComponent as Sticker } from '../assets/revSticker.svg'
+import { addComma, alphabeticalOrder } from '../controller/controller'
 
 const FeaturedCars = () => {
   const { cars } = useContext(CarContext)
@@ -16,7 +17,8 @@ const FeaturedCars = () => {
   const [filterApplied, setFilterApplied] = useState(false)
   const [showFilter, setShowFilter] = useState(false)
   useEffect(() => {
-    const uniqueMakes = [...new Set(cars.map((car) => car.Make))]
+    let uniqueMakes = [...new Set(cars.map((car) => car.Make))]
+    uniqueMakes = alphabeticalOrder(uniqueMakes)
     setMakes(uniqueMakes)
     console.log('Unique makes:', uniqueMakes)
   }, [cars])
@@ -161,7 +163,7 @@ const FeaturedCars = () => {
                         <h2 className=" w-auto font-west-avenue text-3xl">
                           {car.Year} {car.Make} {car.Model}
                         </h2>
-                        <p>{car.Mileage} miles</p>
+                        <p>{addComma(car.Mileage)} miles</p>
                       </div>
                       <DblArrow className="ml-6 h-6" />
                     </div>
@@ -195,7 +197,7 @@ const FeaturedCars = () => {
                         <h2 className=" w-auto font-west-avenue text-3xl">
                           {car.Year} {car.Make} {car.Model}
                         </h2>
-                        <p>{car.Mileage} miles</p>
+                        <p>{addComma(car.Mileage)} miles</p>
                       </div>
                       <DblArrow className="ml-6 h-6" />
                     </div>

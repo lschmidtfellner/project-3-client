@@ -44,3 +44,29 @@ export async function getCarsFromSalePost(setCars) {
         console.log(error)
     }
 }
+
+export function addComma(number) {
+    const decimalSplit = `${number}`.split(".")
+
+    const numberString = decimalSplit[0]
+    let decimalString = `.${decimalSplit[1]}`
+    if (decimalString.includes(`undefined`)) decimalString = ""
+
+    if (numberString.length <= 3) return `${numberString}${decimalString}`
+
+    const reversed = numberString.split("").reverse()
+    let comma = 0
+    for (let i = 0; i < reversed.length; i++) {
+        if (comma === 3) {
+            reversed[i] = `${reversed[i]},`
+            comma = 0
+        }
+        comma++
+    }
+
+    return `${reversed.reverse().join("")}${decimalString}`
+}
+
+export function alphabeticalOrder(arr) {
+    return arr.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+}
