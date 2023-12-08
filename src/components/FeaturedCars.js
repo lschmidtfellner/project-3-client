@@ -185,11 +185,11 @@ const FeaturedCars = () => {
                     <Sticker className="h-24 font-west-avenue text-3xl" />
                   </div>
                   <div className="w-full border-black border">
-                    <div className="">
+                    <div className="lg:h-128 md:h-96 sm:h-96">
                       <img
                         src={car.image}
                         alt="Car"
-                        className="w-full h-full object-cover border-b border-black"
+                        className="w-full h-full object-fit border-b border-black"
                       />
                     </div>
                     <div className="lg:h-32 flex justify-between items-center p-6">
