@@ -17,6 +17,12 @@ export const theme = {
       'regular': 400,
       'bold': 700,
     },
+    height: {
+      '128': '32rem',
+    },
+    width: {
+      '701': '43.813rem',
+    },
   },
 };
 export const plugins = [];

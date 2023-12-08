@@ -98,8 +98,8 @@ const UserCarListings = () => {
                     <Sticker className="h-24 font-west-avenue text-3xl" />
                   </div>
               <div className="w-full border-black border border-b-0">
-                <div className="border-b border-black">
-                  <img src={userCarListings[index]?.image} alt='Car' className="w-full h-full object-cover" />
+                <div className="lg:h-128 md:h-96 sm:h-96 border-b border-black">
+                  <img src={userCarListings[index]?.image} alt='Car' className="w-full h-full object-fit" />
                 </div>
                 <div className="flex justify-between items-center p-6">
                       <div className="">
