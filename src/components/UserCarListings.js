@@ -103,7 +103,7 @@ const UserCarListings = () => {
                 </div>
                 <div className="flex justify-between items-center p-6">
                       <div className="">
-                        <h2 className=" w-auto font-west-avenue text-3xl">
+                        <h2 className="w-auto font-west-avenue text-3xl">
                           {car.Year} {car.Make} {car.Model}
                         </h2>
                         <p>{addComma(car.Mileage)} miles</p>
