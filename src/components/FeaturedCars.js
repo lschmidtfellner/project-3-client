@@ -185,7 +185,7 @@ const FeaturedCars = () => {
                     <Sticker className="h-24 font-west-avenue text-3xl" />
                   </div>
                   <div className="w-full border-black border">
-                    <div className="aspect-w-16 aspect-h-9">
+                    <div className="img-container aspect-w-16 aspect-h-9">
                       <img
                         src={car.image}
                         alt="Car"
