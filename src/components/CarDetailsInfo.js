@@ -14,8 +14,8 @@ export default function CarDetailsInfo( {selectedCar} ) {
         <div className='lg:w-701'>
             <div className='border border-black'>
 
-                <div className='lg:h-128 md:h-96 sm:h-96 border-b border-black flex justify-center'>
-                    <img src={selectedCar.image} className="w-full h-full object-fit" alt='Car' />
+                <div className='img-container aspect-w-16 aspect-h-9 border-b border-black flex justify-center'>
+                    <img src={selectedCar.image} className="aspect-content object-cover" alt='Car' />
                 </div>
 
                 <div className='border-b border-black pl-8 py-5'>

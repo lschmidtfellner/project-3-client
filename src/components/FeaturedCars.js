@@ -151,11 +151,11 @@ const FeaturedCars = () => {
                     <Sticker className="h-24 font-west-avenue text-3xl" />
                   </div>
                   <div className="w-full border-black border">
-                    <div className="w-fit">
+                    <div className="img-container aspect-w-16 aspect-h-9">
                       <img
                         src={car.image}
                         alt="Car"
-                        className="w-full h-full object-cover border-b border-black"
+                        className="aspect-content object-cover border-b border-black"
                       />
                     </div>
                     <div className="flex justify-between items-center p-6">
@@ -185,11 +185,11 @@ const FeaturedCars = () => {
                     <Sticker className="h-24 font-west-avenue text-3xl" />
                   </div>
                   <div className="w-full border-black border">
-                    <div className="lg:h-128 md:h-96 sm:h-96">
+                    <div className="aspect-w-16 aspect-h-9">
                       <img
                         src={car.image}
                         alt="Car"
-                        className="w-full h-full object-fit border-b border-black"
+                        className="aspect-content object-cover border-b border-black"
                       />
                     </div>
                     <div className="lg:h-32 flex justify-between items-center p-6">
