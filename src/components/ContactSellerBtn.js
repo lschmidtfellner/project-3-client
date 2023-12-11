@@ -65,6 +65,13 @@ const ContactSellerBtn = ({ userId, selectedCar }) => {
                     window.open(gmailLink, '_blank');
                 }
             });
+        } else {
+            Swal.fire({
+                title: 'No such user',
+                text: 'Please log in or create an account to contact this seller. Thank you!',
+                icon: 'error',
+                confirmButtonText: 'OK',
+            })
         };
     };
 
