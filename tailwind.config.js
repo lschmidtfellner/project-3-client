@@ -23,6 +23,11 @@ export const theme = {
     width: {
       '701': '43.813rem',
     },
+    zIndex: {
+      '100': '100',
+    },
   },
 };
-export const plugins = [];
+export const plugins = [
+  require('@tailwindcss/aspect-ratio'),
+];

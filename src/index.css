@@ -75,6 +75,14 @@ code {
   background-color: var(--pink-bg);
 }
 
+.sticker {
+  z-index: 1000;
+}
+
+.img-container{
+  padding-top: 3rem;
+}
+
 svg {
   fill: white;
 }
