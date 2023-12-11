@@ -68,7 +68,7 @@ const ContactSellerBtn = ({ userId, selectedCar }) => {
         } else {
             Swal.fire({
                 title: 'No such user',
-                text: 'Please log in or create an account to contact this seller.',
+                text: 'Please log in or create an account to contact this seller. Thank you!',
                 icon: 'error',
                 confirmButtonText: 'OK',
             })
