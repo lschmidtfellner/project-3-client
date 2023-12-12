@@ -75,7 +75,7 @@ const FeaturedCars = () => {
   return (
     <div className="min-h-screen px-5 sm:px-24 md:px-52 xl:px-72 bg-off-white pt-20 pb-10 overflow-x-hidden">
       <div className='w-full flex justify-center'>
-        <div className="flex flex-wrap justify-between items-center w-full  mb-8 pt-8 lg:w-[50%]">
+        <div className="flex flex-wrap justify-between items-center w-full mb-8 pt-8 lg:w-[50%]">
           <h1 className="flex text-center text-3xl font-bold my-8">
             Featured Cars
           </h1>
