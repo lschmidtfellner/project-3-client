@@ -63,11 +63,14 @@ const UserCarListings = () => {
         setShowPriceModal(false);
         Swal.fire({
           icon: 'success',
-          title: "Price updated successfully!",
-          text: 'Please enter a valid number for the price'
+          title: "Price updated successfully!"
         });
       })
       .catch(error => console.error('Error updating car price:', error));
+      Swal.fire({
+        icon: 'error',
+        title: "Please enter a valid number for the price."
+      });
   } else {
     console.error('invalid price input');
   }
