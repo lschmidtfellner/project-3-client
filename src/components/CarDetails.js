@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import ContactSellerBtn from './ContactSellerBtn';
 import CarDetailsInfo from './CarDetailsInfo';
 import { getCarsFromSalePost } from '../controller/controller';
+import { ReactComponent as BkDblArrow } from '../assets/bkarrow.svg';
+
 
 
 const formatPrice = (price) => {
@@ -30,6 +32,7 @@ const CarDetails = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const selectedCarId = queryParams.get('id');
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCarsFromSalePost(setCars)
@@ -47,17 +50,26 @@ const CarDetails = () => {
     return <span>Loading...</span>;
   }
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className='flex flex-col min-h-screen px-5 bg-off-white pt-32 pb-10 overflow-x-hidden items-center w-full'>
-      {/* <div className='flex flex-col items-center w-full sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[40%]'> */}
-      <div className='flex flex-col items-center w-full'>
+      <div className='flex flex-col items-center w-full sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[40%]'>
+    {/* <div onClick={goBack} className="cursor-pointer">
+      <div className='flex justify-between items-center p-6'> */}
+      <CarDetailsInfo selectedCar={selectedCar}>
+        {/* <BkDblArrow className="ml-6 h-6" /> */}
+      </CarDetailsInfo>
+      {/* </div>
+    </div> */}
+    <ContactSellerBtn 
 
-      <CarDetailsInfo selectedCar={selectedCar}/>
-      <ContactSellerBtn 
             userId={selectedCar.user}
             selectedCar={selectedCar}
             >Contact Seller
-      </ContactSellerBtn>
+    </ContactSellerBtn>
       </div>
     </div>
   );

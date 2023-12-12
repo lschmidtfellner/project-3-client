@@ -110,7 +110,7 @@ const UserCarListingsDetails = () => {
                 <div key={selectedCar._id}>
                     {/* <CarDetailsInfo selectedCar={selectedCar}/> */}
                     <div className=''>
-                        <div className='border border-black'>
+                        <div className='border border-black border-b-0'>
 
                             <div className='border-b border-black flex justify-center'>
                                 <img src={selectedCar.image} alt='Car' />
@@ -124,11 +124,11 @@ const UserCarListingsDetails = () => {
                                 <BkDblArrow className="ml-6 h-6" />
                             </div>
                         </div>
-                            <div className='border-b border-black pl-8 py-5'>
+                            <div className='border-b border-black p-6'>
                                 <p>{`${selectedCar.Description}`}</p>
                             </div>
 
-                            <div className='font-bold text-2xl pl-8 py-5'>
+                            <div className='font-bold text-2xl p-6'>
                                 <p>{`${formatPrice(selectedCar.Price)}`}</p>
                             </div>
 
