@@ -63,11 +63,14 @@ const UserCarListings = () => {
         setShowPriceModal(false);
         Swal.fire({
           icon: 'success',
-          title: "Price updated successfully!",
-          text: 'Please enter a valid number for the price'
+          title: "Price updated successfully!"
         });
       })
       .catch(error => console.error('Error updating car price:', error));
+      Swal.fire({
+        icon: 'error',
+        title: "Please enter a valid number for the price."
+      });
   } else {
     console.error('invalid price input');
   }
@@ -98,8 +101,8 @@ const UserCarListings = () => {
                     <Sticker className="h-24 font-west-avenue text-3xl" />
                   </div>
               <div className="w-full border-black border border-b-0">
-                <div className="border-b border-black">
-                  <img src={userCarListings[index]?.image} alt='Car' className="w-full h-full object-cover" />
+                <div className="img-container aspect-w-16 aspect-h-9 border-b border-black">
+                  <img src={userCarListings[index]?.image} alt='Car' className="aspect-content object-cover" />
                 </div>
                 <div className="flex justify-between items-center p-6">
                       <div className="">

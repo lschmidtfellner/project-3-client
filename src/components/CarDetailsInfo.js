@@ -19,11 +19,11 @@ export default function CarDetailsInfo({ selectedCar }) {
     };
 
     return (
-        <div className=''>
+        <div className='lg:w-701'>
             <div className='border border-black'>
 
-                <div className='border-b border-black flex justify-center'>
-                    <img src={selectedCar.image} alt='Car' />
+                <div className='img-container aspect-w-16 aspect-h-9 border-b border-black flex justify-center'>
+                    <img src={selectedCar.image} className="aspect-content object-cover" alt='Car' />
                 </div>
                 <div onClick={goBack} className="cursor-pointer">
                     <div className='border-b border-black flex justify-between items-center p-6'>

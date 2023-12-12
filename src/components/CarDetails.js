@@ -65,6 +65,7 @@ const CarDetails = () => {
       {/* </div>
     </div> */}
     <ContactSellerBtn 
+
             userId={selectedCar.user}
             selectedCar={selectedCar}
             >Contact Seller
