@@ -17,12 +17,6 @@ export const theme = {
       'regular': 400,
       'bold': 700,
     },
-    height: {
-      '128': '32rem',
-    },
-    width: {
-      '701': '43.813rem',
-    },
     zIndex: {
       '100': '100',
       '1100': '1100',

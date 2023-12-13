@@ -19,7 +19,7 @@ export default function CarDetailsInfo({ selectedCar }) {
     };
 
     return (
-        <div className='w-701'>
+        <div className='w-full'>
             <div className='border border-black'>
 
                 <div className='img-container aspect-w-16 aspect-h-9 border-b border-black flex justify-center'>
