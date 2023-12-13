@@ -55,7 +55,7 @@ function Nav({ isLoggedin, setIsLoggedIn }) {
   }
 
   return (
-    <div className="fixed z-1010">
+    <div className="fixed z-1100">
       <div
         onClick={() => menuToggle()}
         style={{ display: isMenuOpen ? 'block' : 'none' }}

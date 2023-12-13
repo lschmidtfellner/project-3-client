@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import {useNavigte} from 'react-router-dom';
+import { useNavigte } from 'react-router-dom';
 import { CarContext } from '../components/CarContextProvider';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +23,7 @@ const UserCarListingsDetails = () => {
     const [showPriceModal, setShowPriceModal] = useState(false);
     const [editingCarId, setEditingCarId] = useState(null);
     const [newPrice, setNewPrice] = useState('');
-   
+
 
     useEffect(() => {
         if (selectedCarId) {
@@ -80,10 +80,13 @@ const UserCarListingsDetails = () => {
                     Swal.fire({
                         icon: 'success',
                         title: "Price updated successfully!",
-                        text: 'Please enter a valid number for the price'
                     });
                 })
                 .catch(error => console.error('Error updating car price:', error));
+            Swal.fire({
+                icon: 'error',
+                title: "Please enter a valid number for the price."
+            });
         } else {
             console.error('invalid price input');
         }
@@ -101,7 +104,7 @@ const UserCarListingsDetails = () => {
 
     const goBack = () => {
         navigate(-1);
-      };
+    };
 
 
     return (
@@ -112,18 +115,18 @@ const UserCarListingsDetails = () => {
                     <div className=''>
                         <div className='border border-black border-b-0'>
 
-                            <div className='border-b border-black flex justify-center'>
-                                <img src={selectedCar.image} alt='Car' />
+                            <div className='img-container aspect-w-16 aspect-h-9 border-b border-black flex justify-center'>
+                                <img src={selectedCar.image} className="aspect-content object-cover" alt='Car' />
                             </div>
-                        <div onClick={goBack} className="cursor-pointer">
-                            <div className='border-b border-black flex justify-between items-center p-6'>
-                            <div className="">
-                                <h2 className='w-auto font-west-avenue text-3xl'>{`${selectedCar.Year} ${selectedCar.Make} ${selectedCar.Model} `}</h2>
-                                <p>{`${addComma(selectedCar.Mileage)} miles`}</p>
+                            <div onClick={goBack} className="cursor-pointer">
+                                <div className='border-b border-black flex justify-between items-center p-6'>
+                                    <div className="">
+                                        <h2 className='w-auto font-west-avenue text-3xl'>{`${selectedCar.Year} ${selectedCar.Make} ${selectedCar.Model} `}</h2>
+                                        <p>{`${addComma(selectedCar.Mileage)} miles`}</p>
+                                    </div>
+                                    <BkDblArrow className="ml-6 h-6" />
                                 </div>
-                                <BkDblArrow className="ml-6 h-6" />
                             </div>
-                        </div>
                             <div className='border-b border-black p-6'>
                                 <p>{`${selectedCar.Description}`}</p>
                             </div>
@@ -150,7 +153,7 @@ const UserCarListingsDetails = () => {
                 </div>
 
                 {showPriceModal && (
-                    <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-opacity-50 bg-black">
+                    <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-opacity-50 bg-black z-1200">
                         <div className="flex flex-col items-center w-[80%] lg:w-1/2 min-h-[30%] lg:h-1/2 bg-off-white p-4">
                             <h2 className="text-3xl font-bold mt-20 mb-12">Edit Price</h2>
 

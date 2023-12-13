@@ -92,18 +92,18 @@ select.blue, select.blue:focus, select.blue:active, select.blue:focus-visible {
   padding: 0 1rem;
 }
 
-/* SWAL button */
+/* SWAL alerts */
 .swal2-modal {
   @apply font-radio-grotesk text-black;
   border-radius: 0;
-  background-color: #F4B74A;
+  background-color: #fffff2;
 }
 
 .swal2-confirm,
 .swal2-confirm:focus,
 .swal2-confirm:active,
 .swal2-confirm:hover {
-  @apply font-radio-grotesk border-2 border-black px-2 bg-transparent opacity-100 font-bold text-black !important;
+  @apply font-radio-grotesk border-2 border-black bg-transparent opacity-100 font-bold text-black !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   background-color: none !important;
@@ -113,22 +113,27 @@ select.blue, select.blue:focus, select.blue:active, select.blue:focus-visible {
 .swal2-styled:focus,
 .swal2-styled:active,
 .swal2-styled:hover {
-  @apply font-radio-grotesk border-2 border-black px-2 bg-transparent opacity-100 font-bold text-black !important;
+  @apply font-radio-grotesk border-2 border-black bg-transparent opacity-100 font-bold text-black !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   background-color: none !important;
 }
 
-.swal2-actions,
-.swal2-actions:focus,
-.swal2-actions:active,
-.swal2-actions:hover {
-  @apply font-radio-grotesk border-2 border-black px-2 bg-transparent opacity-100 font-bold text-black !important;
+.swal2-actions
+ {
+  @apply font-radio-grotesk border-2 border-black bg-transparent opacity-100 font-bold text-black !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   background-color: none !important;
 }
 
+div:where(.swal2-container) button:where(.swal2-styled) {
+  margin: 0em !important;
+  /* padding: 0.625em 1.1em;
+  transition: box-shadow .1s;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0);
+  font-weight: 500; */
+}
 
 .swal2-title {
   @apply font-bold
@@ -141,6 +146,7 @@ select.blue, select.blue:focus, select.blue:active, select.blue:focus-visible {
 .swal2-icon {
   border-color: black !important;
 }
+
 
 body {
   @apply font-radio-grotesk

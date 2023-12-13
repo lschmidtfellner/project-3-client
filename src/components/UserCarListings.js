@@ -140,7 +140,7 @@ const UserCarListings = () => {
       )}
 
       {showPriceModal && (
-        <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-opacity-50 bg-black">
+        <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-opacity-50 bg-black z-1200">
           <div className="flex flex-col items-center w-[80%] lg:w-1/2 min-h-[30%] lg:h-1/2 bg-off-white p-4">
             <h2 className="text-3xl font-bold mt-20 mb-12">Edit Price</h2>
            
